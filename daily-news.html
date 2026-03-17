@@ -513,10 +513,20 @@ async function loadCalendar(){
     const now=new Date();
     const start=new Date(now.getFullYear(),now.getMonth(),now.getDate()).toISOString();
     const end=new Date(now.getFullYear(),now.getMonth(),now.getDate()+1).toISOString();
-    const r=await fetch(`https://www.googleapis.com/calendar/v3/calendars/primary/events?timeMin=${encodeURIComponent(start)}&timeMax=${encodeURIComponent(end)}&singleEvents=true&orderBy=startTime&maxResults=15`,{headers:{'Authorization':'Bearer '+calToken}});
-    const d=await r.json();
-    if(d.error)throw new Error(d.error.message);
-    const events=d.items||[];
+    const params=`timeMin=${encodeURIComponent(start)}&timeMax=${encodeURIComponent(end)}&singleEvents=true&orderBy=startTime&maxResults=15`;
+    const headers={'Authorization':'Bearer '+calToken};
+    // Fetch primary + shared "Calendar" in parallel
+    const [r1,r2]=await Promise.all([
+      fetch(`https://www.googleapis.com/calendar/v3/calendars/primary/events?${params}`,{headers}),
+      fetch(`https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent('Calendar')}/events?${params}`,{headers}),
+    ]);
+    const [d1,d2]=await Promise.all([r1.json(),r2.json()]);
+    if(d1.error)throw new Error(d1.error.message);
+    // Merge and sort by start time, deduplicate by id
+    const allEvents=[...(d1.items||[]),...(d2.error?[]:(d2.items||[]))];
+    const seen=new Set();
+    const events=allEvents.filter(e=>{if(seen.has(e.id))return false;seen.add(e.id);return true;})
+      .sort((a,b)=>{const ta=a.start?.dateTime||a.start?.date||'';const tb=b.start?.dateTime||b.start?.date||'';return ta.localeCompare(tb);});
     document.getElementById('cal-content').innerHTML=events.length
       ?events.map(e=>{
           const isAll=!e.start?.dateTime;
@@ -738,4 +748,3 @@ init();
 </script>
 </body>
 </html>
-

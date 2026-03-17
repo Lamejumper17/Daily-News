@@ -512,8 +512,12 @@ async function loadCalendar(){
   try{
     const headers={'Authorization':'Bearer '+calToken};
     const now=new Date();
-    const start=new Date(now.getFullYear(),now.getMonth(),now.getDate()).toISOString();
-    const end=new Date(now.getFullYear(),now.getMonth(),now.getDate()+1).toISOString();
+    // Use ET day boundaries (UTC-4 EDT / UTC-5 EST) -- pad with extra hours to catch all ET events
+    const etOffset=5*60*60*1000; // EST offset in ms (conservative)
+    const startOfDayET=new Date(Date.UTC(now.getFullYear(),now.getMonth(),now.getDate())-etOffset);
+    const endOfDayET=new Date(Date.UTC(now.getFullYear(),now.getMonth(),now.getDate()+1)+etOffset);
+    const start=startOfDayET.toISOString();
+    const end=endOfDayET.toISOString();
     const params=`timeMin=${encodeURIComponent(start)}&timeMax=${encodeURIComponent(end)}&singleEvents=true&orderBy=startTime&maxResults=25`;
     // Get all calendars
     const calListRes=await fetch('https://www.googleapis.com/calendar/v3/users/me/calendarList?minAccessRole=reader',{headers});
@@ -541,10 +545,45 @@ async function loadCalendar(){
       const tb=b.start?.dateTime||b.start?.date||'';
       return ta.localeCompare(tb);
     });
-    document.getElementById('cal-content').innerHTML=allEvents.length
-      ?allEvents.map(e=>{
-          const isAll=!e.start?.dateTime;
-          const t=isAll?'All day':new Date(e.start.dateTime).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
+    // Filter to only events that are actually today in ET
+    const todayET=new Date().toLocaleDateString('en-US',{timeZone:'America/New_York'});
+
+    // Build a map of calendar id -> timeZone
+    const calTZMap={};
+    calendars.forEach(cal=>calTZMap[cal.id]=cal.timeZone||'UTC');
+
+    const todayEvents=allEvents.filter(e=>{
+      if(!e.start?.dateTime)return true;
+      // If calendar is UTC, treat the time as ET (Outlook imported calendars store local time as UTC)
+      const calId=e.organizer?.email||e.creator?.email||'';
+      const calTZ=calTZMap[calId]||'UTC';
+      const displayTZ=calTZ==='UTC'?'America/New_York':calTZ;
+      const evtDateET=new Date(e.start.dateTime).toLocaleDateString('en-US',{timeZone:displayTZ});
+      return evtDateET===todayET;
+    });
+
+    document.getElementById('cal-content').innerHTML=todayEvents.length
+      ?todayEvents.map(e=>{
+          if(!e.start?.dateTime)return`<div class="cal-item"><div class="cal-dot"></div><div style="flex:1"><div class="cal-title">${e.summary||'Untitled'}</div></div><div class="cal-time">All day</div></div>`;
+          const calId=e.organizer?.email||e.creator?.email||'';
+          const calTZ=calTZMap[calId]||'UTC';
+          const displayTZ=calTZ==='UTC'?'America/New_York':calTZ;
+          // If stored as UTC but actually local time, parse as-is without offset conversion
+          const rawDT=e.start.dateTime;
+          const isUTCCal=calTZ==='UTC';
+          let t;
+          if(isUTCCal){
+            // Strip the Z and treat as local ET time
+            const localStr=rawDT.replace('Z','');
+            const d=new Date(localStr+'Z');
+            // Render the UTC clock value directly as the time (no conversion)
+            const h=d.getUTCHours(),m=d.getUTCMinutes();
+            const ampm=h>=12?'PM':'AM';
+            const h12=h%12||12;
+            t=`${h12}:${String(m).padStart(2,'0')} ${ampm}`;
+          }else{
+            t=new Date(rawDT).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',timeZone:'America/New_York'});
+          }
           return`<div class="cal-item"><div class="cal-dot"></div><div style="flex:1"><div class="cal-title">${e.summary||'Untitled'}</div>${e.location?`<div class="cal-sub">${e.location}</div>`:''}</div><div class="cal-time">${t}</div></div>`;
         }).join('')
       :'<div style="font-size:13px;color:var(--text3)">No events today.</div>';

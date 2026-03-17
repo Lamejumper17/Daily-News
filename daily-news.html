@@ -262,20 +262,14 @@ label{font-size:12px;font-weight:600;letter-spacing:0.04em;text-transform:upperc
     <div id="national-news"><div class="loading"><div class="spinner"></div>Loading headlines...</div></div>
   </div>
 
-  <!-- LOCAL NEWS + JOURNAL -->
-  <div class="grid">
-    <div class="card">
-      <div class="card-label" style="margin-bottom:1rem">Philadelphia News</div>
-      <div id="local-news"><div class="loading"><div class="spinner"></div>Loading...</div></div>
+  <!-- JOURNAL -->
+  <div class="full card">
+    <div class="card-header">
+      <div class="card-label">Daily Journal</div>
+      <button class="btn btn-sm" onclick="saveJournal()">Save</button>
     </div>
-    <div class="card">
-      <div class="card-header">
-        <div class="card-label">Daily Journal</div>
-        <button class="btn btn-sm" onclick="saveJournal()">Save</button>
-      </div>
-      <div class="journal-tabs" id="journal-tabs"></div>
-      <div id="journal-view"></div>
-    </div>
+    <div class="journal-tabs" id="journal-tabs"></div>
+    <div id="journal-view"></div>
   </div>
 
 </main>
@@ -286,6 +280,7 @@ label{font-size:12px;font-weight:600;letter-spacing:0.04em;text-transform:upperc
 const WEATHER_KEY='c1df8f029d391346e1594d808308f6e5';
 const GCAL_CLIENT_ID='840231870401-7hu1c8sjpiqrvshmrd4lg5gki6hcst6e.apps.googleusercontent.com';
 const GCAL_SCOPE='https://www.googleapis.com/auth/calendar.readonly https://www.googleapis.com/auth/spreadsheets https://www.googleapis.com/auth/drive.file';
+const CAL_ONLY_SCOPE='https://www.googleapis.com/auth/calendar.readonly';
 const CITY='Philadelphia,PA,US';
 
 const QUOTES=[
@@ -724,7 +719,6 @@ async function addLink(){
 function loadLive(){
   loadWeather();
   loadNews(null,'national-news');
-  loadNews('Philadelphia','local-news');
   if(calToken)loadCalendar();
 }
 
@@ -744,3 +738,4 @@ init();
 </script>
 </body>
 </html>
+

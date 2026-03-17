@@ -12,79 +12,156 @@
   --border:rgba(60,55,45,0.12);--border-med:rgba(60,55,45,0.22);
   --text:#1a1814;--text2:#6b6660;--text3:#9c9690;
   --accent:#2d5a3d;--accent-light:#e8f0ea;
+  --danger:#c0392b;--danger-light:#fdecea;
+  --warn:#b8860b;--warn-light:#fdf8e8;
   --radius:12px;--radius-sm:8px;
   --shadow:0 2px 12px rgba(0,0,0,0.06),0 1px 3px rgba(0,0,0,0.04)
 }
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:15px;line-height:1.6}
-main{padding:2rem;max-width:1000px;margin:0 auto}
+main{padding:2rem;max-width:1060px;margin:0 auto}
 
-/* HEADER */
 .header{margin-bottom:2rem}
-.greeting{font-family:'DM Serif Display',serif;font-size:2.4rem;letter-spacing:-0.03em;line-height:1.1;margin-bottom:0.25rem}
-.dateline{font-size:14px;color:var(--text3);display:flex;align-items:center;gap:0.75rem}
-.refresh-btn{background:none;border:none;font-size:12px;color:var(--text3);cursor:pointer;font-family:'DM Sans',sans-serif;padding:0;display:flex;align-items:center;gap:4px}
+.greeting{font-family:'DM Serif Display',serif;font-size:2.4rem;letter-spacing:-0.03em;line-height:1.1;margin-bottom:0.3rem}
+.dateline{font-size:14px;color:var(--text3);display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap}
+.sync-pill{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--text3);background:var(--surface2);padding:3px 9px;border-radius:99px}
+.sync-dot{width:6px;height:6px;border-radius:50%;background:var(--text3);flex-shrink:0}
+.sync-dot.synced{background:var(--accent)}.sync-dot.syncing{background:var(--warn);animation:pulse 1s infinite}.sync-dot.error{background:var(--danger)}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+.refresh-btn{background:none;border:none;font-size:12px;color:var(--text3);cursor:pointer;font-family:'DM Sans',sans-serif;padding:0}
 .refresh-btn:hover{color:var(--accent)}
 
-/* GRID */
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:1.25rem}
 .grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.25rem;margin-bottom:1.25rem}
 .full{margin-bottom:1.25rem}
-
-/* CARD */
-.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.5rem;height:100%}
-.card-label{font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--text3);margin-bottom:1rem}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.5rem}
+.card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
+.card-label{font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--text3)}
 
 /* WEATHER */
-.weather-main{display:flex;align-items:flex-end;gap:1rem;margin-bottom:0.75rem}
-.weather-temp{font-family:'DM Serif Display',serif;font-size:4rem;letter-spacing:-0.04em;line-height:1}
-.weather-desc{font-size:15px;color:var(--text2);margin-bottom:0.25rem}
-.weather-details{display:grid;grid-template-columns:1fr 1fr;gap:0.4rem;font-size:13px;color:var(--text2)}
 .weather-icon{font-size:2.5rem;margin-bottom:0.5rem}
+.weather-temp{font-family:'DM Serif Display',serif;font-size:4rem;letter-spacing:-0.04em;line-height:1}
+.weather-row{display:flex;align-items:flex-end;gap:1rem;margin-bottom:0.75rem}
+.weather-details{display:grid;grid-template-columns:1fr 1fr;gap:0.4rem;font-size:13px;color:var(--text2)}
 
 /* NEWS */
-.news-item{padding:0.85rem 0;border-bottom:1px solid var(--border)}
-.news-item:last-child{border-bottom:none}
-.news-item:first-child{padding-top:0}
+.news-item{padding:0.8rem 0;border-bottom:1px solid var(--border)}
+.news-item:last-child{border-bottom:none}.news-item:first-child{padding-top:0}
 .news-source{font-size:11px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:var(--accent);margin-bottom:0.2rem}
-.news-title{font-size:14px;font-weight:500;line-height:1.4;color:var(--text)}
-.news-title a{color:inherit;text-decoration:none}
+.news-title a{font-size:14px;font-weight:500;line-height:1.4;color:var(--text);text-decoration:none}
 .news-title a:hover{color:var(--accent)}
 .news-time{font-size:11px;color:var(--text3);margin-top:0.2rem}
 
 /* CALENDAR */
-.cal-item{display:flex;gap:1rem;padding:0.75rem 0;border-bottom:1px solid var(--border);align-items:flex-start}
-.cal-item:last-child{border-bottom:none}
-.cal-item:first-child{padding-top:0}
-.cal-time{font-size:12px;font-weight:600;color:var(--accent);min-width:52px;padding-top:2px}
+.cal-item{display:flex;gap:0.75rem;padding:0.7rem 0;border-bottom:1px solid var(--border);align-items:flex-start}
+.cal-item:last-child{border-bottom:none}.cal-item:first-child{padding-top:0}
+.cal-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);flex-shrink:0;margin-top:5px}
 .cal-title{font-size:14px;font-weight:500;flex:1}
 .cal-sub{font-size:12px;color:var(--text3);margin-top:1px}
-.cal-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);flex-shrink:0;margin-top:5px}
+.cal-time{font-size:12px;font-weight:600;color:var(--accent);white-space:nowrap}
 
-/* LOADING / ERROR */
+/* TO-DO */
+.todo-input-row{display:flex;gap:0.5rem;margin-bottom:0.75rem}
+.todo-input-row input{flex:1;padding:0.5rem 0.75rem;border:1px solid var(--border-med);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);background:var(--surface)}
+.todo-input-row input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(45,90,61,0.1)}
+.todo-item{display:flex;align-items:center;gap:0.75rem;padding:0.55rem 0;border-bottom:1px solid var(--border);font-size:14px}
+.todo-item:last-child{border-bottom:none}
+.todo-check{width:18px;height:18px;border:2px solid var(--border-med);border-radius:4px;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all 0.15s}
+.todo-check.done{background:var(--accent);border-color:var(--accent)}
+.todo-check.done::after{content:'✓';color:white;font-size:11px;font-weight:700}
+.todo-text{flex:1;transition:color 0.15s}
+.todo-text.done{color:var(--text3);text-decoration:line-through}
+
+/* WORKOUT */
+.workout-controls{display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1rem;align-items:center}
+.location-btn{padding:0.35rem 0.85rem;border:1px solid var(--border-med);border-radius:99px;background:var(--surface);font-size:13px;font-family:'DM Sans',sans-serif;cursor:pointer;color:var(--text2);transition:all 0.15s;font-weight:500}
+.location-btn.active{background:var(--accent);border-color:var(--accent);color:white}
+.focus-select{padding:0.4rem 0.75rem;border:1px solid var(--border-med);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:13px;color:var(--text);background:var(--surface);flex:1;min-width:140px}
+.focus-select:focus{outline:none;border-color:var(--accent)}
+.workout-plan{background:var(--surface2);border-radius:var(--radius-sm);padding:1rem;font-size:13px;line-height:1.7;color:var(--text2);white-space:pre-wrap}
+.workout-plan strong{color:var(--text);font-weight:600}
+.workout-history-section{border-top:1px solid var(--border);padding-top:1rem;margin-top:1rem}
+.wh-item{font-size:13px;padding:0.5rem 0;border-bottom:1px solid var(--border);display:flex;gap:0.75rem}
+.wh-item:last-child{border-bottom:none}
+.wh-date{font-size:11px;font-weight:600;color:var(--accent);min-width:72px}
+.wh-detail{color:var(--text2);flex:1;line-height:1.5}
+
+/* JOURNAL */
+.journal-tabs{display:flex;gap:0.4rem;flex-wrap:wrap;margin-bottom:1rem}
+.j-tab{padding:0.3rem 0.75rem;border:1px solid var(--border-med);border-radius:99px;background:var(--surface);font-size:12px;font-family:'DM Sans',sans-serif;cursor:pointer;color:var(--text2);transition:all 0.15s}
+.j-tab:hover{background:var(--surface2)}.j-tab.active{background:var(--accent);border-color:var(--accent);color:white}
+.journal-entry-view{background:var(--surface2);border-radius:var(--radius-sm);padding:1rem;font-size:13px;color:var(--text2);line-height:1.6;white-space:pre-wrap}
+textarea{width:100%;border:1px solid var(--border-med);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);background:var(--surface);padding:0.75rem;resize:vertical;line-height:1.5}
+textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(45,90,61,0.1)}
+.saved-hint{font-size:11px;color:var(--accent);height:16px;margin-top:0.35rem}
+
+/* LINKS */
+.links-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:0.75rem}
+.link-item{display:flex;flex-direction:column;align-items:center;gap:0.4rem;padding:0.85rem;border:1px solid var(--border);border-radius:var(--radius-sm);text-decoration:none;color:var(--text);transition:all 0.15s;background:var(--surface);text-align:center}
+.link-item:hover{border-color:var(--accent);background:var(--accent-light);color:var(--accent)}
+.link-icon{font-size:1.5rem}.link-name{font-size:12px;font-weight:500}
+.link-add-row{display:flex;gap:0.5rem;margin-top:0.75rem;flex-wrap:wrap;display:none}
+.link-add-row input{flex:1;min-width:110px;padding:0.45rem 0.65rem;border:1px solid var(--border-med);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:13px;color:var(--text);background:var(--surface)}
+.link-add-row input:focus{outline:none;border-color:var(--accent)}
+
+/* QUOTE */
+.quote-text{font-family:'DM Serif Display',serif;font-style:italic;font-size:1.1rem;line-height:1.5;margin-bottom:0.5rem}
+.quote-author{font-size:12px;color:var(--text3)}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:5px;padding:0.45rem 0.9rem;border-radius:var(--radius-sm);border:1px solid var(--border-med);background:var(--surface);color:var(--text);font-size:13px;font-family:'DM Sans',sans-serif;font-weight:500;cursor:pointer;transition:background 0.15s,transform 0.1s;white-space:nowrap}
+.btn:hover{background:var(--surface2)}.btn:active{transform:scale(0.98)}
+.btn-primary{background:var(--accent);border-color:var(--accent);color:white}.btn-primary:hover{background:#234830}
+.btn-sm{padding:0.35rem 0.7rem;font-size:12px}
+.btn-danger{border-color:transparent;background:none;color:var(--danger);padding:0.25rem 0.4rem;font-size:11px}.btn-danger:hover{background:var(--danger-light)}
+
 .loading{color:var(--text3);font-size:13px;display:flex;align-items:center;gap:8px}
 .spinner{width:14px;height:14px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin 0.8s linear infinite;flex-shrink:0}
 @keyframes spin{to{transform:rotate(360deg)}}
-.error{font-size:13px;color:#c0392b}
+.error-msg{font-size:13px;color:var(--danger)}
+input[type="text"],input[type="number"]{padding:0.5rem 0.75rem;border:1px solid var(--border-med);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);background:var(--surface)}
+input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(45,90,61,0.1)}
+label{font-size:12px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:var(--text2)}
 
-/* NOTES */
-.notes-area{width:100%;border:1px solid var(--border-med);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);background:var(--surface);padding:0.75rem;resize:vertical;min-height:100px;line-height:1.5}
-.notes-area:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(45,90,61,0.1)}
-.notes-saved{font-size:11px;color:var(--accent);margin-top:0.4rem;height:16px}
-
-/* QUOTE */
-.quote-text{font-family:'DM Serif Display',serif;font-style:italic;font-size:1.1rem;line-height:1.5;color:var(--text);margin-bottom:0.5rem}
-.quote-author{font-size:12px;color:var(--text3)}
+/* LOGIN */
+#login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--bg)}
+.login-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:3rem 2.5rem;text-align:center;max-width:420px;width:100%;margin:1rem}
+.login-title{font-family:'DM Serif Display',serif;font-size:2rem;letter-spacing:-0.03em;margin-bottom:0.5rem}
+.login-sub{font-size:14px;color:var(--text2);margin-bottom:2rem;line-height:1.6}
+.google-btn{display:inline-flex;align-items:center;gap:10px;padding:0.75rem 1.5rem;background:var(--surface);border:1px solid var(--border-med);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;cursor:pointer;transition:background 0.15s;color:var(--text)}
+.google-btn:hover{background:var(--surface2)}
+.login-note{font-size:12px;color:var(--text3);margin-top:1.5rem;line-height:1.6}
 
 @media(max-width:680px){
-  main{padding:1rem}
-  .grid,.grid-3{grid-template-columns:1fr}
+  main{padding:1rem}.grid,.grid-3{grid-template-columns:1fr}
   .greeting{font-size:1.8rem}
 }
 </style>
 </head>
 <body>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="login-card">
+    <div class="login-title">Good Morning, Zeke</div>
+    <p class="login-sub">Sign in with Google to sync your dashboard across all your devices.</p>
+    <button class="google-btn" onclick="signIn()">
+      <svg width="18" height="18" viewBox="0 0 24 24">
+        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/>
+        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+      </svg>
+      Sign in with Google
+    </button>
+    <p class="login-note">Your data syncs privately via Google Sheets in your own Google Drive.</p>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app" style="display:none">
 <main>
 
+  <!-- HEADER -->
   <div class="header">
     <div class="greeting" id="greeting">Good morning, Zeke</div>
     <div class="dateline">
@@ -92,76 +169,305 @@ main{padding:2rem;max-width:1000px;margin:0 auto}
       <span>·</span>
       <span id="time-display"></span>
       <span>·</span>
-      <button class="refresh-btn" onclick="loadAll()">↻ Refresh</button>
+      <div class="sync-pill"><div class="sync-dot" id="sync-dot"></div><span id="sync-label">Ready</span></div>
+      <span>·</span>
+      <button class="refresh-btn" onclick="loadLive()">↻ Refresh</button>
+      <span>·</span>
+      <button class="refresh-btn" onclick="signOut()">Sign out</button>
     </div>
   </div>
 
   <!-- WEATHER + QUOTE -->
   <div class="grid">
     <div class="card">
-      <div class="card-label">Philadelphia Weather</div>
-      <div id="weather-content"><div class="loading"><div class="spinner"></div>Loading weather...</div></div>
+      <div class="card-label" style="margin-bottom:1rem">Philadelphia Weather</div>
+      <div id="weather-content"><div class="loading"><div class="spinner"></div>Loading...</div></div>
     </div>
     <div class="card">
-      <div class="card-label">Today's Quote</div>
-      <div id="quote-content"><div class="loading"><div class="spinner"></div>Loading...</div></div>
+      <div class="card-label" style="margin-bottom:1rem">Today's Quote</div>
+      <div id="quote-content"></div>
     </div>
   </div>
 
-  <!-- NATIONAL NEWS -->
-  <div class="full">
-    <div class="card">
-      <div class="card-label">National News</div>
-      <div id="national-news"><div class="loading"><div class="spinner"></div>Loading headlines...</div></div>
-    </div>
-  </div>
-
-  <!-- LOCAL NEWS + CALENDAR -->
+  <!-- TODO + CALENDAR -->
   <div class="grid">
     <div class="card">
-      <div class="card-label">Philadelphia News</div>
-      <div id="local-news"><div class="loading"><div class="spinner"></div>Loading local news...</div></div>
+      <div class="card-label" style="margin-bottom:1rem">To-Do List</div>
+      <div class="todo-input-row">
+        <input type="text" id="todo-input" placeholder="Add a task..." onkeydown="if(event.key==='Enter')addTodo()" style="width:auto;flex:1">
+        <button class="btn btn-primary btn-sm" onclick="addTodo()">Add</button>
+      </div>
+      <div id="todo-list"><div class="loading"><div class="spinner"></div>Loading...</div></div>
     </div>
     <div class="card">
-      <div class="card-label">Today's Calendar</div>
-      <div id="calendar-content">
-        <div style="font-size:13px;color:var(--text2);line-height:1.6">
-          <p style="margin-bottom:0.75rem">Connect your Google Calendar to see today's events here.</p>
-          <button onclick="initCalendar()" style="background:var(--accent);color:white;border:none;padding:0.5rem 1rem;border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer">Connect Google Calendar</button>
-        </div>
+      <div class="card-header">
+        <div class="card-label">Today's Calendar</div>
+        <button class="btn btn-sm" id="cal-connect-btn" onclick="initCalendar()">Connect</button>
+      </div>
+      <div id="calendar-content"><div style="font-size:13px;color:var(--text3)">Hit Connect to link your Google Calendar.</div></div>
+    </div>
+  </div>
+
+  <!-- QUICK LINKS -->
+  <div class="full card">
+    <div class="card-header">
+      <div class="card-label">Quick Links</div>
+      <button class="btn btn-sm" onclick="toggleAddLink()" id="add-link-btn">+ Add</button>
+    </div>
+    <div class="links-grid" id="links-grid"></div>
+    <div class="link-add-row" id="link-add-row">
+      <input type="text" id="link-name-input" placeholder="Name" style="width:auto">
+      <input type="text" id="link-url-input" placeholder="https://..." style="width:auto;flex:1">
+      <button class="btn btn-primary btn-sm" onclick="addLink()">Add</button>
+      <button class="btn btn-sm" onclick="toggleAddLink()">Cancel</button>
+    </div>
+  </div>
+
+  <!-- AI WORKOUT -->
+  <div class="full card">
+    <div class="card-header">
+      <div class="card-label">Today's Workout</div>
+      <div id="workout-sync-hint" style="font-size:11px;color:var(--accent)"></div>
+    </div>
+    <div class="workout-controls">
+      <button class="location-btn active" id="loc-home" onclick="setLocation('home')">🏠 Home</button>
+      <button class="location-btn" id="loc-gym" onclick="setLocation('gym')">🏋️ Gym</button>
+      <select class="focus-select" id="focus-select">
+        <option value="">Pick a focus area...</option>
+        <option value="Chest & Push">Chest & Push</option>
+        <option value="Back & Pull">Back & Pull</option>
+        <option value="Legs">Legs</option>
+        <option value="Shoulders">Shoulders</option>
+        <option value="Arms (Biceps/Triceps)">Arms (Biceps/Triceps)</option>
+        <option value="Core/Abs">Core/Abs</option>
+        <option value="Cardio">Cardio</option>
+        <option value="Full Body">Full Body</option>
+        <option value="Rest Day">Rest Day</option>
+      </select>
+      <button class="btn btn-primary btn-sm" onclick="generateWorkout()">Generate Workout</button>
+      <button class="btn btn-sm" onclick="saveWorkoutLog()" id="save-workout-btn" style="display:none">Save to Log</button>
+    </div>
+    <div id="workout-plan-area"></div>
+    <div id="workout-history-area" style="display:none">
+      <div class="workout-history-section">
+        <div class="card-label" style="margin-bottom:0.75rem">Recent Workout Log</div>
+        <div id="workout-history-list"></div>
       </div>
     </div>
   </div>
 
-  <!-- NOTES -->
-  <div class="full">
+  <!-- NATIONAL NEWS -->
+  <div class="full card">
+    <div class="card-label" style="margin-bottom:1rem">National News</div>
+    <div id="national-news"><div class="loading"><div class="spinner"></div>Loading headlines...</div></div>
+  </div>
+
+  <!-- LOCAL NEWS + JOURNAL -->
+  <div class="grid">
     <div class="card">
-      <div class="card-label">Notes & Reminders</div>
-      <textarea class="notes-area" id="notes" placeholder="Jot down anything for today..." oninput="saveNotes()"></textarea>
-      <div class="notes-saved" id="notes-saved"></div>
+      <div class="card-label" style="margin-bottom:1rem">Philadelphia News</div>
+      <div id="local-news"><div class="loading"><div class="spinner"></div>Loading...</div></div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-label">Daily Journal</div>
+        <button class="btn btn-sm" onclick="saveJournal()">Save</button>
+      </div>
+      <div class="journal-tabs" id="journal-tabs"></div>
+      <div id="journal-view"></div>
     </div>
   </div>
 
 </main>
+</div>
 
 <script>
-const WEATHER_KEY = 'c1df8f029d391346e1594d808308f6e5';
-const NEWS_KEY = '7741e7809cc642dd9bf8f201148ab28e';
-const CITY = 'Philadelphia,PA,US';
-const GCAL_CLIENT_ID = '840231870401-7hu1c8sjpiqrvshmrd4lg5gki6hcst6e.apps.googleusercontent.com';
-const GCAL_SCOPE = 'https://www.googleapis.com/auth/calendar.readonly';
+// ── CONFIG ──
+const WEATHER_KEY='c1df8f029d391346e1594d808308f6e5';
+const GCAL_CLIENT_ID='840231870401-7hu1c8sjpiqrvshmrd4lg5gki6hcst6e.apps.googleusercontent.com';
+const GCAL_SCOPE='https://www.googleapis.com/auth/calendar.readonly https://www.googleapis.com/auth/spreadsheets https://www.googleapis.com/auth/drive.file';
+const CITY='Philadelphia,PA,US';
 
-// ── TIME & GREETING ──
+const QUOTES=[
+  {text:"The secret of getting ahead is getting started.",author:"Mark Twain"},
+  {text:"It does not matter how slowly you go as long as you do not stop.",author:"Confucius"},
+  {text:"Small daily improvements are the key to staggering long-term results.",author:"Robin Sharma"},
+  {text:"Financial freedom is available to those who learn about it and work for it.",author:"Robert Kiyosaki"},
+  {text:"Do not save what is left after spending; instead spend what is left after saving.",author:"Warren Buffett"},
+  {text:"Either you run the day or the day runs you.",author:"Jim Rohn"},
+  {text:"Take care of your body. It's the only place you have to live.",author:"Jim Rohn"},
+  {text:"Push yourself, because no one else is going to do it for you.",author:"Unknown"},
+  {text:"Success is the sum of small efforts, repeated day in and day out.",author:"Robert Collier"},
+  {text:"Discipline is the bridge between goals and accomplishment.",author:"Jim Rohn"},
+  {text:"A budget is telling your money where to go instead of wondering where it went.",author:"Dave Ramsey"},
+  {text:"The groundwork of all happiness is health.",author:"Leigh Hunt"},
+  {text:"What you do today can improve all your tomorrows.",author:"Ralph Marston"},
+  {text:"You don't have to be great to start, but you have to start to be great.",author:"Zig Ziglar"},
+  {text:"The best time to plant a tree was 20 years ago. The second best time is now.",author:"Chinese Proverb"},
+];
+
+const DEFAULT_LINKS=[
+  {name:'Finance Tracker',url:'https://lamejumper17.github.io/finance-tracker/finance-tracker.html',icon:'💰'},
+];
+
+// ── STATE ──
+let accessToken=null,spreadsheetId=null,calToken=null;
+let workoutLocation='home',currentWorkoutPlan='';
+let journalViewDate=todayKey();
+let todos=[],workoutLog=[],journal={},links=[...DEFAULT_LINKS];
+
+// ── HELPERS ──
+function todayKey(){return new Date().toISOString().split('T')[0];}
+function fmtDate(d){return new Date(d+'T12:00:00').toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});}
+function timeAgo(s){const m=(Date.now()-new Date(s))/60000;return m<60?Math.round(m)+'m ago':m<1440?Math.round(m/60)+'h ago':Math.round(m/1440)+'d ago';}
+function setSyncStatus(s,l){document.getElementById('sync-dot').className='sync-dot '+s;document.getElementById('sync-label').textContent=l;}
+
+// ── AUTH (combined Google OAuth for Calendar + Sheets) ──
+function signIn(){
+  const base=window.location.href.split('?')[0].split('#')[0];
+  window.location.href='https://accounts.google.com/o/oauth2/v2/auth?'+new URLSearchParams({
+    client_id:GCAL_CLIENT_ID,redirect_uri:base,response_type:'token',scope:GCAL_SCOPE,prompt:'select_account'
+  });
+}
+function signOut(){
+  accessToken=null;calToken=null;
+  localStorage.removeItem('nd_token');localStorage.removeItem('nd_token_exp');
+  localStorage.removeItem('nd_sheet_id');
+  document.getElementById('login-screen').style.display='flex';
+  document.getElementById('app').style.display='none';
+}
+function handleCallback(){
+  const p=new URLSearchParams(window.location.hash.substring(1));
+  const t=p.get('access_token'),e=p.get('expires_in');
+  if(t){
+    accessToken=t;calToken=t;
+    localStorage.setItem('nd_token',t);
+    localStorage.setItem('nd_token_exp',Date.now()+parseInt(e)*1000);
+    history.replaceState(null,'',window.location.pathname);
+    return true;
+  }
+  return false;
+}
+function loadStoredToken(){
+  const t=localStorage.getItem('nd_token'),e=localStorage.getItem('nd_token_exp');
+  if(t&&e&&Date.now()<parseInt(e)){accessToken=t;calToken=t;return true;}
+  return false;
+}
+
+// Calendar-only reconnect (for calendar button)
+function initCalendar(){signIn();}
+
+// ── SHEETS ──
+async function sheetsReq(method,ep,body){
+  const r=await fetch('https://sheets.googleapis.com/v4/spreadsheets'+ep,{
+    method,headers:{'Authorization':'Bearer '+accessToken,'Content-Type':'application/json'},
+    body:body?JSON.stringify(body):undefined
+  });
+  if(!r.ok){const e=await r.json();throw new Error(e.error?.message||'Sheets error');}
+  return r.json();
+}
+async function driveReq(ep){
+  const r=await fetch('https://www.googleapis.com/drive/v3'+ep,{headers:{'Authorization':'Bearer '+accessToken}});
+  if(!r.ok)throw new Error('Drive error');
+  return r.json();
+}
+
+async function findOrCreateSheet(){
+  spreadsheetId=localStorage.getItem('nd_sheet_id')||null;
+  if(spreadsheetId){
+    try{await sheetsReq('GET','/'+spreadsheetId+'?fields=spreadsheetId');return;}
+    catch{spreadsheetId=null;localStorage.removeItem('nd_sheet_id');}
+  }
+  const s=await driveReq("/files?q=name='Daily Dashboard Data' and mimeType='application/vnd.google-apps.spreadsheet' and trashed=false&fields=files(id)");
+  if(s.files?.length){spreadsheetId=s.files[0].id;localStorage.setItem('nd_sheet_id',spreadsheetId);return;}
+  const c=await sheetsReq('POST','',{
+    properties:{title:'Daily Dashboard Data'},
+    sheets:[{properties:{title:'Todos'}},{properties:{title:'WorkoutLog'}},{properties:{title:'Journal'}},{properties:{title:'Links'}}]
+  });
+  spreadsheetId=c.spreadsheetId;localStorage.setItem('nd_sheet_id',spreadsheetId);
+  await sheetsReq('PUT','/'+spreadsheetId+'/values/Todos!A1:D1?valueInputOption=RAW',{values:[['id','text','done','date']]});
+  await sheetsReq('PUT','/'+spreadsheetId+'/values/WorkoutLog!A1:E1?valueInputOption=RAW',{values:[['date','focus','location','plan','logged']]});
+  await sheetsReq('PUT','/'+spreadsheetId+'/values/Journal!A1:B1?valueInputOption=RAW',{values:[['date','entry']]});
+  await sheetsReq('PUT','/'+spreadsheetId+'/values/Links!A1:C1?valueInputOption=RAW',{values:[['name','url','icon']]});
+}
+
+async function loadAllData(){
+  setSyncStatus('syncing','Loading...');
+  try{
+    await findOrCreateSheet();
+    // Todos
+    const tr=await sheetsReq('GET','/'+spreadsheetId+'/values/Todos!A2:D1000');
+    todos=(tr.values||[]).map(r=>({id:r[0],text:r[1],done:r[2]==='true',date:r[3]})).filter(t=>t.text);
+    // Workout log
+    const wr=await sheetsReq('GET','/'+spreadsheetId+'/values/WorkoutLog!A2:E100');
+    workoutLog=(wr.values||[]).map(r=>({date:r[0],focus:r[1],location:r[2],plan:r[3]})).filter(w=>w.date);
+    // Journal
+    const jr=await sheetsReq('GET','/'+spreadsheetId+'/values/Journal!A2:B500');
+    journal={};(jr.values||[]).forEach(r=>{if(r[0]&&r[1])journal[r[0]]=r[1];});
+    // Links
+    const lr=await sheetsReq('GET','/'+spreadsheetId+'/values/Links!A2:C100');
+    const savedLinks=(lr.values||[]).map(r=>({name:r[0],url:r[1],icon:r[2]||'🔗'})).filter(l=>l.name&&l.url);
+    if(savedLinks.length)links=savedLinks;
+    setSyncStatus('synced','Synced');
+    renderTodos();renderWorkoutHistory();renderJournal();renderLinks();
+    // Check if today's workout already logged
+    const todayLog=workoutLog.find(w=>w.date===todayKey());
+    if(todayLog){
+      currentWorkoutPlan=todayLog.plan;
+      document.getElementById('workout-plan-area').innerHTML=`<div class="workout-plan">${formatWorkoutPlan(todayLog.plan)}</div>`;
+      document.getElementById('workout-sync-hint').textContent='Today\'s workout logged ✓';
+    }
+  }catch(e){setSyncStatus('error','Sync error');console.error(e);}
+}
+
+async function saveTodosToSheet(){
+  setSyncStatus('syncing','Saving...');
+  try{
+    await sheetsReq('PUT','/'+spreadsheetId+'/values/Todos!A1:D1000?valueInputOption=RAW',{
+      values:[['id','text','done','date'],...todos.map(t=>[t.id,t.text,t.done,t.date])]
+    });
+    setSyncStatus('synced','Saved');
+  }catch(e){setSyncStatus('error','Save failed');}
+}
+
+async function saveWorkoutLogToSheet(){
+  setSyncStatus('syncing','Saving...');
+  try{
+    await sheetsReq('PUT','/'+spreadsheetId+'/values/WorkoutLog!A1:E100?valueInputOption=RAW',{
+      values:[['date','focus','location','plan','logged'],...workoutLog.map(w=>[w.date,w.focus,w.location,w.plan,new Date().toISOString()])]
+    });
+    setSyncStatus('synced','Saved');
+  }catch(e){setSyncStatus('error','Save failed');}
+}
+
+async function saveJournalToSheet(){
+  setSyncStatus('syncing','Saving...');
+  try{
+    await sheetsReq('PUT','/'+spreadsheetId+'/values/Journal!A1:B500?valueInputOption=RAW',{
+      values:[['date','entry'],...Object.entries(journal).sort((a,b)=>b[0].localeCompare(a[0]))]
+    });
+    setSyncStatus('synced','Saved');
+  }catch(e){setSyncStatus('error','Save failed');}
+}
+
+async function saveLinksToSheet(){
+  setSyncStatus('syncing','Saving...');
+  try{
+    await sheetsReq('PUT','/'+spreadsheetId+'/values/Links!A1:C100?valueInputOption=RAW',{
+      values:[['name','url','icon'],...links.map(l=>[l.name,l.url,l.icon])]
+    });
+    setSyncStatus('synced','Saved');
+  }catch(e){setSyncStatus('error','Save failed');}
+}
+
+// ── TIME ──
 function updateTime(){
-  const now=new Date();
-  const h=now.getHours();
-  const greeting=h<12?'Good morning':'h<17?Good afternoon':'Good evening';
+  const now=new Date(),h=now.getHours();
   document.getElementById('greeting').textContent=(h<12?'Good morning':h<17?'Good afternoon':'Good evening')+', Zeke';
   document.getElementById('time-display').textContent=now.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
 }
 function setDateline(){
-  const now=new Date();
-  document.getElementById('dateline').textContent=now.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
+  document.getElementById('dateline').textContent=new Date().toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
 }
 
 // ── WEATHER ──
@@ -170,174 +476,271 @@ async function loadWeather(){
     const r=await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${CITY}&appid=${WEATHER_KEY}&units=imperial`);
     const d=await r.json();
     if(d.cod!==200)throw new Error(d.message);
-    const temp=Math.round(d.main.temp);
-    const feels=Math.round(d.main.feels_like);
-    const high=Math.round(d.main.temp_max);
-    const low=Math.round(d.main.temp_min);
-    const desc=d.weather[0].description;
-    const humidity=d.main.humidity;
-    const wind=Math.round(d.wind.speed);
-    const id=d.weather[0].id;
-    const icon=id>=800?'☀️':id===800?'☀️':id>=700?'🌫️':id>=600?'❄️':id>=500?'🌧️':id>=300?'🌦️':id>=200?'⛈️':'🌤️';
+    const temp=Math.round(d.main.temp),feels=Math.round(d.main.feels_like),high=Math.round(d.main.temp_max),low=Math.round(d.main.temp_min);
+    const desc=d.weather[0].description,hum=d.main.humidity,wind=Math.round(d.wind.speed),id=d.weather[0].id;
+    const icon=id>=800?'☀️':id>=700?'🌫️':id>=600?'❄️':id>=500?'🌧️':id>=300?'🌦️':id>=200?'⛈️':'🌤️';
     document.getElementById('weather-content').innerHTML=`
       <div class="weather-icon">${icon}</div>
-      <div class="weather-main">
-        <div class="weather-temp">${temp}°</div>
-        <div><div class="weather-desc">${desc.charAt(0).toUpperCase()+desc.slice(1)}</div><div style="font-size:13px;color:var(--text3)">Feels like ${feels}°</div></div>
-      </div>
-      <div class="weather-details">
-        <div>↑ High ${high}°</div><div>↓ Low ${low}°</div>
-        <div>💧 ${humidity}%</div><div>💨 ${wind} mph</div>
-      </div>`;
-  }catch(e){document.getElementById('weather-content').innerHTML=`<div class="error">Could not load weather. Check your API key.</div>`;}
+      <div class="weather-row"><div class="weather-temp">${temp}°</div><div><div style="font-size:15px;color:var(--text2)">${desc.charAt(0).toUpperCase()+desc.slice(1)}</div><div style="font-size:13px;color:var(--text3)">Feels like ${feels}°</div></div></div>
+      <div class="weather-details"><div>↑ ${high}°</div><div>↓ ${low}°</div><div>💧 ${hum}%</div><div>💨 ${wind} mph</div></div>`;
+  }catch(e){document.getElementById('weather-content').innerHTML=`<div class="error-msg">Could not load weather.</div>`;}
 }
 
 // ── NEWS ──
-function timeAgo(dateStr){
-  const diff=(Date.now()-new Date(dateStr))/1000/60;
-  if(diff<60)return Math.round(diff)+'m ago';
-  if(diff<1440)return Math.round(diff/60)+'h ago';
-  return Math.round(diff/1440)+'d ago';
-}
-
-async function loadNews(query,elId,pageSize=5){
+async function loadNews(query,elId){
   try{
-    const url=query
-      ?`https://newsapi.org/v2/everything?q=${encodeURIComponent(query)}&apiKey=${NEWS_KEY}&pageSize=${pageSize}&sortBy=publishedAt&language=en`
-      :`https://newsapi.org/v2/top-headlines?country=us&apiKey=${NEWS_KEY}&pageSize=${pageSize}`;
-    const r=await fetch(url);
-    const d=await r.json();
-    if(d.status!=='ok')throw new Error(d.message);
-    const articles=d.articles.filter(a=>a.title&&!a.title.includes('[Removed]'));
-    if(!articles.length){document.getElementById(elId).innerHTML='<div class="error">No articles found.</div>';return;}
-    document.getElementById(elId).innerHTML=articles.map(a=>`
-      <div class="news-item">
-        <div class="news-source">${a.source.name}</div>
-        <div class="news-title"><a href="${a.url}" target="_blank">${a.title}</a></div>
-        <div class="news-time">${timeAgo(a.publishedAt)}</div>
-      </div>`).join('');
-  }catch(e){document.getElementById(elId).innerHTML=`<div class="error">Could not load news.</div>`;}
+    const feed=query
+      ?`https://news.google.com/rss/search?q=${encodeURIComponent(query)}+when:1d&hl=en-US&gl=US&ceid=US:en`
+      :`https://news.google.com/rss?hl=en-US&gl=US&ceid=US:en`;
+    const proxy=`https://api.allorigins.win/get?url=${encodeURIComponent(feed)}`;
+    const r=await fetch(proxy);
+    const data=await r.json();
+    const parser=new DOMParser();
+    const xml=parser.parseFromString(data.contents,'text/xml');
+    const items=Array.from(xml.querySelectorAll('item')).slice(0,query?4:6);
+    if(!items.length)throw new Error('No items');
+    document.getElementById(elId).innerHTML=items.map(item=>{
+      const title=item.querySelector('title')?.textContent||'';
+      const link=item.querySelector('link')?.textContent||'#';
+      const pubDate=item.querySelector('pubDate')?.textContent||'';
+      const source=item.querySelector('source')?.textContent||'Google News';
+      const clean=title.replace(/ - [^-]+$/,'');
+      return`<div class="news-item"><div class="news-source">${source}</div><div class="news-title"><a href="${link}" target="_blank">${clean}</a></div><div class="news-time">${pubDate?timeAgo(new Date(pubDate).toISOString()):''}</div></div>`;
+    }).join('');
+  }catch{document.getElementById(elId).innerHTML='<div class="error-msg">Could not load news. Try refreshing.</div>';}
 }
 
-// ── GOOGLE CALENDAR ──
-let calToken=null;
-
-function loadStoredCalToken(){
-  const t=localStorage.getItem('nl_cal_token');
-  const e=localStorage.getItem('nl_cal_exp');
-  if(t&&e&&Date.now()<parseInt(e)){calToken=t;return true;}
-  return false;
-}
-
-function initCalendar(){
-  const base=window.location.href.split('?')[0].split('#')[0];
-  const params=new URLSearchParams({client_id:GCAL_CLIENT_ID,redirect_uri:base,response_type:'token',scope:GCAL_SCOPE,prompt:'select_account'});
-  window.location.href='https://accounts.google.com/o/oauth2/v2/auth?'+params;
-}
-
-function handleCalCallback(){
-  const params=new URLSearchParams(window.location.hash.substring(1));
-  const token=params.get('access_token');
-  const exp=params.get('expires_in');
-  if(token){
-    calToken=token;
-    localStorage.setItem('nl_cal_token',token);
-    localStorage.setItem('nl_cal_exp',Date.now()+parseInt(exp)*1000);
-    history.replaceState(null,'',window.location.pathname);
-    return true;
-  }
-  return false;
-}
-
+// ── CALENDAR ──
 async function loadCalendar(){
   if(!calToken)return;
+  document.getElementById('cal-connect-btn').textContent='Refresh';
   document.getElementById('calendar-content').innerHTML='<div class="loading"><div class="spinner"></div>Loading events...</div>';
   try{
     const now=new Date();
     const start=new Date(now.getFullYear(),now.getMonth(),now.getDate()).toISOString();
     const end=new Date(now.getFullYear(),now.getMonth(),now.getDate()+1).toISOString();
-    const r=await fetch(`https://www.googleapis.com/calendar/v3/calendars/primary/events?timeMin=${start}&timeMax=${end}&singleEvents=true&orderBy=startTime&maxResults=10`,{headers:{'Authorization':'Bearer '+calToken}});
-    const d=await r.json();
+    const d=await (await fetch(`https://www.googleapis.com/calendar/v3/calendars/primary/events?timeMin=${start}&timeMax=${end}&singleEvents=true&orderBy=startTime&maxResults=15`,{headers:{'Authorization':'Bearer '+calToken}})).json();
     if(d.error)throw new Error(d.error.message);
     const events=d.items||[];
-    if(!events.length){
-      document.getElementById('calendar-content').innerHTML='<div style="font-size:13px;color:var(--text3);padding:0.5rem 0">No events today. Enjoy the free time!</div>';
-      return;
-    }
-    document.getElementById('calendar-content').innerHTML=events.map(e=>{
-      const isAllDay=!e.start.dateTime;
-      const timeStr=isAllDay?'All day':new Date(e.start.dateTime).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
-      return`<div class="cal-item">
-        <div class="cal-dot"></div>
-        <div style="flex:1">
-          <div class="cal-title">${e.summary||'Untitled'}</div>
-          ${e.location?`<div class="cal-sub">${e.location}</div>`:''}
-        </div>
-        <div class="cal-time">${timeStr}</div>
-      </div>`;
-    }).join('');
-  }catch(e){
-    document.getElementById('calendar-content').innerHTML=`<div class="error">Could not load calendar. <button onclick="initCalendar()" style="background:none;border:none;color:var(--accent);cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;text-decoration:underline">Reconnect</button></div>`;
-  }
+    document.getElementById('calendar-content').innerHTML=events.length
+      ?events.map(e=>{
+          const isAll=!e.start.dateTime;
+          const t=isAll?'All day':new Date(e.start.dateTime).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
+          return`<div class="cal-item"><div class="cal-dot"></div><div style="flex:1"><div class="cal-title">${e.summary||'Untitled'}</div>${e.location?`<div class="cal-sub">${e.location}</div>`:''}</div><div class="cal-time">${t}</div></div>`;
+        }).join('')
+      :'<div style="font-size:13px;color:var(--text3);padding:0.5rem 0">No events today.</div>';
+  }catch{document.getElementById('calendar-content').innerHTML='<div class="error-msg">Session expired. <button class="btn btn-sm" onclick="initCalendar()" style="margin-left:6px">Reconnect</button></div>';}
 }
 
 // ── QUOTE ──
-const QUOTES=[
-  {text:"The secret of getting ahead is getting started.",author:"Mark Twain"},
-  {text:"It does not matter how slowly you go as long as you do not stop.",author:"Confucius"},
-  {text:"Small daily improvements are the key to staggering long-term results.",author:"Robin Sharma"},
-  {text:"You don't have to be great to start, but you have to start to be great.",author:"Zig Ziglar"},
-  {text:"The best time to plant a tree was 20 years ago. The second best time is now.",author:"Chinese Proverb"},
-  {text:"Financial freedom is available to those who learn about it and work for it.",author:"Robert Kiyosaki"},
-  {text:"Do not save what is left after spending; instead spend what is left after saving.",author:"Warren Buffett"},
-  {text:"Every day is a new opportunity to change your life.",author:"Unknown"},
-  {text:"Success is the sum of small efforts, repeated day in and day out.",author:"Robert Collier"},
-  {text:"Discipline is the bridge between goals and accomplishment.",author:"Jim Rohn"},
-  {text:"The only way to do great work is to love what you do.",author:"Steve Jobs"},
-  {text:"What you do today can improve all your tomorrows.",author:"Ralph Marston"},
-  {text:"A budget is telling your money where to go instead of wondering where it went.",author:"Dave Ramsey"},
-  {text:"Rich people stay rich by living like they're broke. Broke people stay broke by living like they're rich.",author:"Unknown"},
-  {text:"Either you run the day or the day runs you.",author:"Jim Rohn"},
-];
 function loadQuote(){
-  const day=new Date().getDate();
-  const q=QUOTES[day%QUOTES.length];
+  const q=QUOTES[new Date().getDate()%QUOTES.length];
   document.getElementById('quote-content').innerHTML=`<div class="quote-text">"${q.text}"</div><div class="quote-author">— ${q.author}</div>`;
 }
 
-// ── NOTES ──
-let notesTimer=null;
-function saveNotes(){
-  clearTimeout(notesTimer);
-  notesTimer=setTimeout(()=>{
-    localStorage.setItem('nl_notes',document.getElementById('notes').value);
-    const saved=document.getElementById('notes-saved');
-    saved.textContent='Saved';
-    setTimeout(()=>saved.textContent='',2000);
-  },600);
+// ── TO-DO ──
+async function addTodo(){
+  const input=document.getElementById('todo-input');
+  const text=input.value.trim();if(!text)return;
+  todos.unshift({id:String(Date.now()),text,done:false,date:todayKey()});
+  input.value='';renderTodos();
+  await saveTodosToSheet();
 }
-function loadNotes(){
-  const saved=localStorage.getItem('nl_notes');
-  if(saved)document.getElementById('notes').value=saved;
+async function toggleTodo(id){
+  todos=todos.map(t=>t.id===id?{...t,done:!t.done}:t);
+  renderTodos();await saveTodosToSheet();
+}
+async function deleteTodo(id){
+  todos=todos.filter(t=>t.id!==id);
+  renderTodos();await saveTodosToSheet();
+}
+function renderTodos(){
+  const el=document.getElementById('todo-list');
+  if(!todos.length){el.innerHTML='<div style="font-size:13px;color:var(--text3);padding:0.5rem 0">No tasks yet.</div>';return;}
+  el.innerHTML=todos.map(t=>`
+    <div class="todo-item">
+      <div class="todo-check ${t.done?'done':''}" onclick="toggleTodo('${t.id}')"></div>
+      <div class="todo-text ${t.done?'done':''}" style="flex:1">${t.text}</div>
+      <div style="font-size:11px;color:var(--text3);margin-right:4px">${fmtDate(t.date)}</div>
+      <button class="btn btn-danger" onclick="deleteTodo('${t.id}')">✕</button>
+    </div>`).join('');
 }
 
-// ── LOAD ALL ──
-function loadAll(){
+// ── WORKOUT ──
+function setLocation(loc){
+  workoutLocation=loc;
+  document.getElementById('loc-home').classList.toggle('active',loc==='home');
+  document.getElementById('loc-gym').classList.toggle('active',loc==='gym');
+}
+
+async function generateWorkout(){
+  const focus=document.getElementById('focus-select').value;
+  if(!focus){alert('Please select a focus area.');return;}
+  const area=document.getElementById('workout-plan-area');
+  area.innerHTML='<div class="loading"><div class="spinner"></div>Generating your workout with AI...</div>';
+  document.getElementById('save-workout-btn').style.display='none';
+
+  // Build recent history context
+  const recentFocus=workoutLog.slice(0,5).map(w=>`${w.date}: ${w.focus}`).join(', ');
+
+  const prompt=`You are a personal trainer creating a specific workout plan for Zeke.
+
+Location: ${workoutLocation==='gym'?'Gym (full equipment available: barbells, dumbbells, cables, machines, squat rack)':'Home (minimal equipment: bodyweight, resistance bands, dumbbells if available)'}
+Focus: ${focus}
+Recent workouts: ${recentFocus||'None yet'}
+Today's date: ${todayKey()}
+
+Create a complete workout with:
+1. A warm-up (2-3 minutes)
+2. Main workout (5-7 exercises with specific sets, reps, and rest periods)
+3. Cool-down stretch (2 minutes)
+
+Be very specific with reps and sets. Format clearly with exercise names bolded. Keep it practical and achievable in 45-60 minutes. If it's a Rest Day, suggest active recovery activities.`;
+
+  try{
+    const res=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:1000,
+        messages:[{role:'user',content:prompt}]
+      })
+    });
+    const data=await res.json();
+    const plan=data.content?.[0]?.text||'Could not generate workout.';
+    currentWorkoutPlan=plan;
+    area.innerHTML=`<div class="workout-plan">${formatWorkoutPlan(plan)}</div>`;
+    document.getElementById('save-workout-btn').style.display='';
+    document.getElementById('save-workout-btn').textContent='Save to Log';
+  }catch(e){
+    area.innerHTML='<div class="error-msg">Could not generate workout. Try again.</div>';
+  }
+}
+
+function formatWorkoutPlan(text){
+  return text
+    .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g,'<em>$1</em>')
+    .replace(/#{1,3}\s+(.+)/g,'<strong style="font-size:14px;color:var(--text)">$1</strong>')
+    .replace(/\n/g,'<br>');
+}
+
+async function saveWorkoutLog(){
+  const focus=document.getElementById('focus-select').value||'General';
+  const existing=workoutLog.findIndex(w=>w.date===todayKey());
+  const entry={date:todayKey(),focus,location:workoutLocation,plan:currentWorkoutPlan};
+  if(existing>=0)workoutLog[existing]=entry;else workoutLog.unshift(entry);
+  workoutLog=workoutLog.slice(0,60);
+  document.getElementById('save-workout-btn').textContent='Saved ✓';
+  document.getElementById('workout-sync-hint').textContent='Today\'s workout logged ✓';
+  renderWorkoutHistory();
+  await saveWorkoutLogToSheet();
+}
+
+function renderWorkoutHistory(){
+  const area=document.getElementById('workout-history-area');
+  const list=document.getElementById('workout-history-list');
+  if(!workoutLog.length){area.style.display='none';return;}
+  area.style.display='';
+  list.innerHTML=workoutLog.slice(0,5).map(w=>`
+    <div class="wh-item">
+      <div class="wh-date">${fmtDate(w.date)}</div>
+      <div class="wh-detail"><strong>${w.focus}</strong> · ${w.location==='gym'?'🏋️ Gym':'🏠 Home'}</div>
+    </div>`).join('');
+}
+
+// ── JOURNAL ──
+async function saveJournal(){
+  const text=document.getElementById('journal-textarea')?.value?.trim();
+  if(!text)return;
+  journal[todayKey()]=text;
+  const hint=document.getElementById('journal-saved');
+  if(hint){hint.textContent='Saved';setTimeout(()=>hint.textContent='',2000);}
+  renderJournal();
+  await saveJournalToSheet();
+}
+
+let journalTimer=null;
+function autoSaveJournal(){
+  clearTimeout(journalTimer);
+  journalTimer=setTimeout(async()=>{
+    const text=document.getElementById('journal-textarea')?.value?.trim();
+    if(text!==undefined){journal[todayKey()]=text;await saveJournalToSheet();const h=document.getElementById('journal-saved');if(h){h.textContent='Saved';setTimeout(()=>h.textContent='',2000);}}
+  },1500);
+}
+
+function renderJournal(){
+  const dates=Object.keys(journal).sort().reverse().slice(0,7);
+  if(!dates.includes(todayKey()))dates.unshift(todayKey());
+  document.getElementById('journal-tabs').innerHTML=dates.map(d=>`
+    <button class="j-tab ${d===journalViewDate?'active':''}" onclick="journalViewDate='${d}';renderJournal()">
+      ${d===todayKey()?'Today':fmtDate(d)}
+    </button>`).join('');
+  const view=document.getElementById('journal-view');
+  if(journalViewDate===todayKey()){
+    view.innerHTML=`<textarea id="journal-textarea" placeholder="How's today going? Thoughts, goals, reflections..." rows="5" oninput="autoSaveJournal()">${journal[todayKey()]||''}</textarea><div class="saved-hint" id="journal-saved"></div>`;
+  }else{
+    const entry=journal[journalViewDate];
+    view.innerHTML=entry
+      ?`<div class="journal-entry-view">${entry}</div>`
+      :'<div style="font-size:13px;color:var(--text3);padding:0.5rem 0">No entry for this day.</div>';
+  }
+}
+
+// ── LINKS ──
+function renderLinks(){
+  document.getElementById('links-grid').innerHTML=links.map((l,i)=>`
+    <div style="position:relative">
+      <a href="${l.url}" target="_blank" class="link-item">
+        <div class="link-icon">${l.icon||'🔗'}</div>
+        <div class="link-name">${l.name}</div>
+      </a>
+      <button class="btn btn-danger" style="position:absolute;top:3px;right:3px;padding:1px 4px;font-size:10px" onclick="deleteLink(${i})">✕</button>
+    </div>`).join('');
+}
+async function deleteLink(i){links.splice(i,1);renderLinks();await saveLinksToSheet();}
+function toggleAddLink(){
+  const row=document.getElementById('link-add-row');
+  const btn=document.getElementById('add-link-btn');
+  const open=row.style.display==='none'||row.style.display==='';
+  row.style.display=open?'flex':'none';
+  btn.textContent=open?'Cancel':'+ Add';
+}
+async function addLink(){
+  const name=document.getElementById('link-name-input').value.trim();
+  const url=document.getElementById('link-url-input').value.trim();
+  if(!name||!url)return;
+  const icon=url.includes('github')?'🐙':url.includes('google')?'📅':url.includes('chase')?'💳':url.includes('psecu')?'🏦':url.includes('drexel')?'🎓':'🔗';
+  links.push({name,url:url.startsWith('http')?url:'https://'+url,icon});
+  document.getElementById('link-name-input').value='';
+  document.getElementById('link-url-input').value='';
+  toggleAddLink();
+  renderLinks();
+  await saveLinksToSheet();
+}
+
+// ── LIVE DATA ──
+function loadLive(){
   loadWeather();
-  loadNews(null,'national-news',6);
-  loadNews('Philadelphia','local-news',4);
-  loadQuote();
+  loadNews(null,'national-news');
+  loadNews('Philadelphia','local-news');
   if(calToken)loadCalendar();
 }
 
 // ── INIT ──
-setDateline();
-updateTime();
-setInterval(updateTime,30000);
-loadNotes();
-const fromCallback=handleCalCallback();
-if(fromCallback||loadStoredCalToken())loadCalendar();
-loadAll();
+async function init(){
+  const fromCallback=handleCallback();
+  const hasToken=fromCallback||loadStoredToken();
+  if(hasToken){
+    document.getElementById('login-screen').style.display='none';
+    document.getElementById('app').style.display='block';
+    setDateline();updateTime();setInterval(updateTime,30000);
+    loadQuote();loadLive();
+    await loadAllData();
+  }
+}
+init();
 </script>
 </body>
 </html>

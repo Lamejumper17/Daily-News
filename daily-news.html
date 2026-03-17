@@ -635,7 +635,7 @@ Keep it achievable in 45-60 minutes. Be encouraging but direct. If Rest Day, sug
   try{
     const res=await fetch('https://api.anthropic.com/v1/messages',{
       method:'POST',
-      headers:{'Content-Type':'application/json'},
+      headers:{'Content-Type':'application/json','x-api-key':'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','anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
       body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:prompt}]})
     });
     const data=await res.json();

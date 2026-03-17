@@ -20,6 +20,16 @@
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:15px;line-height:1.6}
 main{padding:2rem;max-width:1060px;margin:0 auto}
 
+/* LOGIN */
+#login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--bg)}
+.login-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:3rem 2.5rem;text-align:center;max-width:420px;width:100%;margin:1rem}
+.login-title{font-family:'DM Serif Display',serif;font-size:2rem;letter-spacing:-0.03em;margin-bottom:0.5rem}
+.login-sub{font-size:14px;color:var(--text2);margin-bottom:2rem;line-height:1.6}
+.google-btn{display:inline-flex;align-items:center;gap:10px;padding:0.75rem 1.5rem;background:var(--surface);border:1px solid var(--border-med);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;cursor:pointer;transition:background 0.15s;color:var(--text)}
+.google-btn:hover{background:var(--surface2)}
+.login-note{font-size:12px;color:var(--text3);margin-top:1.5rem;line-height:1.6}
+
+/* HEADER */
 .header{margin-bottom:2rem}
 .greeting{font-family:'DM Serif Display',serif;font-size:2.4rem;letter-spacing:-0.03em;line-height:1.1;margin-bottom:0.3rem}
 .dateline{font-size:14px;color:var(--text3);display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap}
@@ -27,11 +37,12 @@ main{padding:2rem;max-width:1060px;margin:0 auto}
 .sync-dot{width:6px;height:6px;border-radius:50%;background:var(--text3);flex-shrink:0}
 .sync-dot.synced{background:var(--accent)}.sync-dot.syncing{background:var(--warn);animation:pulse 1s infinite}.sync-dot.error{background:var(--danger)}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
-.refresh-btn{background:none;border:none;font-size:12px;color:var(--text3);cursor:pointer;font-family:'DM Sans',sans-serif;padding:0}
-.refresh-btn:hover{color:var(--accent)}
+.hdr-btn{background:none;border:none;font-size:12px;color:var(--text3);cursor:pointer;font-family:'DM Sans',sans-serif;padding:0}
+.hdr-btn:hover{color:var(--accent)}
 
+/* LAYOUT */
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:1.25rem}
-.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.25rem;margin-bottom:1.25rem}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;margin-bottom:1.25rem}
 .full{margin-bottom:1.25rem}
 .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.5rem}
 .card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
@@ -44,64 +55,60 @@ main{padding:2rem;max-width:1060px;margin:0 auto}
 .weather-details{display:grid;grid-template-columns:1fr 1fr;gap:0.4rem;font-size:13px;color:var(--text2)}
 
 /* NEWS */
-.news-item{padding:0.8rem 0;border-bottom:1px solid var(--border)}
+.news-item{padding:0.75rem 0;border-bottom:1px solid var(--border)}
 .news-item:last-child{border-bottom:none}.news-item:first-child{padding-top:0}
-.news-source{font-size:11px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:var(--accent);margin-bottom:0.2rem}
-.news-title a{font-size:14px;font-weight:500;line-height:1.4;color:var(--text);text-decoration:none}
+.news-source{font-size:10px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:var(--accent);margin-bottom:0.2rem}
+.news-title a{font-size:13px;font-weight:500;line-height:1.4;color:var(--text);text-decoration:none}
 .news-title a:hover{color:var(--accent)}
-.news-time{font-size:11px;color:var(--text3);margin-top:0.2rem}
+.news-time{font-size:11px;color:var(--text3);margin-top:0.15rem}
 
 /* CALENDAR */
-.cal-item{display:flex;gap:0.75rem;padding:0.7rem 0;border-bottom:1px solid var(--border);align-items:flex-start}
+.cal-item{display:flex;gap:0.75rem;padding:0.65rem 0;border-bottom:1px solid var(--border);align-items:flex-start}
 .cal-item:last-child{border-bottom:none}.cal-item:first-child{padding-top:0}
 .cal-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);flex-shrink:0;margin-top:5px}
 .cal-title{font-size:14px;font-weight:500;flex:1}
 .cal-sub{font-size:12px;color:var(--text3);margin-top:1px}
 .cal-time{font-size:12px;font-weight:600;color:var(--accent);white-space:nowrap}
 
-/* TO-DO */
+/* TODO */
 .todo-input-row{display:flex;gap:0.5rem;margin-bottom:0.75rem}
-.todo-input-row input{flex:1;padding:0.5rem 0.75rem;border:1px solid var(--border-med);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);background:var(--surface)}
-.todo-input-row input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(45,90,61,0.1)}
-.todo-item{display:flex;align-items:center;gap:0.75rem;padding:0.55rem 0;border-bottom:1px solid var(--border);font-size:14px}
+.todo-item{display:flex;align-items:center;gap:0.75rem;padding:0.5rem 0;border-bottom:1px solid var(--border);font-size:14px}
 .todo-item:last-child{border-bottom:none}
 .todo-check{width:18px;height:18px;border:2px solid var(--border-med);border-radius:4px;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all 0.15s}
 .todo-check.done{background:var(--accent);border-color:var(--accent)}
 .todo-check.done::after{content:'✓';color:white;font-size:11px;font-weight:700}
-.todo-text{flex:1;transition:color 0.15s}
-.todo-text.done{color:var(--text3);text-decoration:line-through}
+.todo-text{flex:1}.todo-text.done{color:var(--text3);text-decoration:line-through}
 
 /* WORKOUT */
 .workout-controls{display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1rem;align-items:center}
-.location-btn{padding:0.35rem 0.85rem;border:1px solid var(--border-med);border-radius:99px;background:var(--surface);font-size:13px;font-family:'DM Sans',sans-serif;cursor:pointer;color:var(--text2);transition:all 0.15s;font-weight:500}
-.location-btn.active{background:var(--accent);border-color:var(--accent);color:white}
-.focus-select{padding:0.4rem 0.75rem;border:1px solid var(--border-med);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:13px;color:var(--text);background:var(--surface);flex:1;min-width:140px}
+.loc-btn{padding:0.35rem 0.85rem;border:1px solid var(--border-med);border-radius:99px;background:var(--surface);font-size:13px;font-family:'DM Sans',sans-serif;cursor:pointer;color:var(--text2);transition:all 0.15s;font-weight:500}
+.loc-btn.active{background:var(--accent);border-color:var(--accent);color:white}
+.focus-select{padding:0.4rem 0.75rem;border:1px solid var(--border-med);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:13px;color:var(--text);background:var(--surface);flex:1;min-width:160px}
 .focus-select:focus{outline:none;border-color:var(--accent)}
-.workout-plan{background:var(--surface2);border-radius:var(--radius-sm);padding:1rem;font-size:13px;line-height:1.7;color:var(--text2);white-space:pre-wrap}
+.workout-plan{background:var(--surface2);border-radius:var(--radius-sm);padding:1rem 1.25rem;font-size:13px;line-height:1.8;color:var(--text2)}
 .workout-plan strong{color:var(--text);font-weight:600}
-.workout-history-section{border-top:1px solid var(--border);padding-top:1rem;margin-top:1rem}
-.wh-item{font-size:13px;padding:0.5rem 0;border-bottom:1px solid var(--border);display:flex;gap:0.75rem}
+.wh-item{display:flex;gap:0.75rem;padding:0.5rem 0;border-bottom:1px solid var(--border);font-size:13px}
 .wh-item:last-child{border-bottom:none}
-.wh-date{font-size:11px;font-weight:600;color:var(--accent);min-width:72px}
-.wh-detail{color:var(--text2);flex:1;line-height:1.5}
+.wh-date{font-size:11px;font-weight:600;color:var(--accent);min-width:72px;padding-top:1px}
+.wh-detail{color:var(--text2);flex:1}
 
 /* JOURNAL */
-.journal-tabs{display:flex;gap:0.4rem;flex-wrap:wrap;margin-bottom:1rem}
+.j-tabs{display:flex;gap:0.4rem;flex-wrap:wrap;margin-bottom:1rem}
 .j-tab{padding:0.3rem 0.75rem;border:1px solid var(--border-med);border-radius:99px;background:var(--surface);font-size:12px;font-family:'DM Sans',sans-serif;cursor:pointer;color:var(--text2);transition:all 0.15s}
 .j-tab:hover{background:var(--surface2)}.j-tab.active{background:var(--accent);border-color:var(--accent);color:white}
-.journal-entry-view{background:var(--surface2);border-radius:var(--radius-sm);padding:1rem;font-size:13px;color:var(--text2);line-height:1.6;white-space:pre-wrap}
-textarea{width:100%;border:1px solid var(--border-med);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);background:var(--surface);padding:0.75rem;resize:vertical;line-height:1.5}
-textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(45,90,61,0.1)}
-.saved-hint{font-size:11px;color:var(--accent);height:16px;margin-top:0.35rem}
+.j-entry-view{background:var(--surface2);border-radius:var(--radius-sm);padding:1rem;font-size:13px;color:var(--text2);line-height:1.6;white-space:pre-wrap}
 
 /* LINKS */
-.links-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:0.75rem}
-.link-item{display:flex;flex-direction:column;align-items:center;gap:0.4rem;padding:0.85rem;border:1px solid var(--border);border-radius:var(--radius-sm);text-decoration:none;color:var(--text);transition:all 0.15s;background:var(--surface);text-align:center}
+.links-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:0.75rem}
+.link-card{position:relative}
+.link-item{display:flex;flex-direction:column;align-items:center;gap:0.4rem;padding:0.85rem;border:1px solid var(--border);border-radius:var(--radius-sm);text-decoration:none;color:var(--text);transition:all 0.15s;background:var(--surface);text-align:center;width:100%}
 .link-item:hover{border-color:var(--accent);background:var(--accent-light);color:var(--accent)}
 .link-icon{font-size:1.5rem}.link-name{font-size:12px;font-weight:500}
-.link-add-row{display:flex;gap:0.5rem;margin-top:0.75rem;flex-wrap:wrap;display:none}
-.link-add-row input{flex:1;min-width:110px;padding:0.45rem 0.65rem;border:1px solid var(--border-med);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:13px;color:var(--text);background:var(--surface)}
-.link-add-row input:focus{outline:none;border-color:var(--accent)}
+.link-del{position:absolute;top:3px;right:3px;background:none;border:none;color:var(--danger);cursor:pointer;font-size:11px;padding:2px 4px;border-radius:3px;opacity:0;transition:opacity 0.15s}
+.link-card:hover .link-del{opacity:1}
+.link-add-form{display:none;gap:0.5rem;margin-top:0.75rem;flex-wrap:wrap}
+.link-add-form input{flex:1;min-width:110px;padding:0.45rem 0.65rem;border:1px solid var(--border-med);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:13px;color:var(--text);background:var(--surface)}
+.link-add-form input:focus{outline:none;border-color:var(--accent)}
 
 /* QUOTE */
 .quote-text{font-family:'DM Serif Display',serif;font-style:italic;font-size:1.1rem;line-height:1.5;margin-bottom:0.5rem}
@@ -114,25 +121,21 @@ textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba
 .btn-sm{padding:0.35rem 0.7rem;font-size:12px}
 .btn-danger{border-color:transparent;background:none;color:var(--danger);padding:0.25rem 0.4rem;font-size:11px}.btn-danger:hover{background:var(--danger-light)}
 
+/* FORMS */
+input[type="text"],textarea,select{font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);background:var(--surface)}
+input[type="text"]{padding:0.5rem 0.75rem;border:1px solid var(--border-med);border-radius:var(--radius-sm);width:100%}
+input[type="text"]:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(45,90,61,0.1)}
+textarea{width:100%;border:1px solid var(--border-med);border-radius:var(--radius-sm);padding:0.75rem;resize:vertical;line-height:1.5}
+textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(45,90,61,0.1)}
+
 .loading{color:var(--text3);font-size:13px;display:flex;align-items:center;gap:8px}
 .spinner{width:14px;height:14px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin 0.8s linear infinite;flex-shrink:0}
 @keyframes spin{to{transform:rotate(360deg)}}
-.error-msg{font-size:13px;color:var(--danger)}
-input[type="text"],input[type="number"]{padding:0.5rem 0.75rem;border:1px solid var(--border-med);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);background:var(--surface)}
-input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(45,90,61,0.1)}
-label{font-size:12px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:var(--text2)}
+.err{font-size:13px;color:var(--danger)}
+.saved-hint{font-size:11px;color:var(--accent);height:16px;margin-top:0.35rem}
 
-/* LOGIN */
-#login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--bg)}
-.login-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:3rem 2.5rem;text-align:center;max-width:420px;width:100%;margin:1rem}
-.login-title{font-family:'DM Serif Display',serif;font-size:2rem;letter-spacing:-0.03em;margin-bottom:0.5rem}
-.login-sub{font-size:14px;color:var(--text2);margin-bottom:2rem;line-height:1.6}
-.google-btn{display:inline-flex;align-items:center;gap:10px;padding:0.75rem 1.5rem;background:var(--surface);border:1px solid var(--border-med);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;cursor:pointer;transition:background 0.15s;color:var(--text)}
-.google-btn:hover{background:var(--surface2)}
-.login-note{font-size:12px;color:var(--text3);margin-top:1.5rem;line-height:1.6}
-
-@media(max-width:680px){
-  main{padding:1rem}.grid,.grid-3{grid-template-columns:1fr}
+@media(max-width:700px){
+  main{padding:1rem}.grid,.grid-4{grid-template-columns:1fr}
   .greeting{font-size:1.8rem}
 }
 </style>
@@ -153,7 +156,7 @@ label{font-size:12px;font-weight:600;letter-spacing:0.04em;text-transform:upperc
       </svg>
       Sign in with Google
     </button>
-    <p class="login-note">Your data syncs privately via Google Sheets in your own Google Drive.</p>
+    <p class="login-note">Todos, journal, and workout history sync privately via Google Sheets.</p>
   </div>
 </div>
 
@@ -161,7 +164,6 @@ label{font-size:12px;font-weight:600;letter-spacing:0.04em;text-transform:upperc
 <div id="app" style="display:none">
 <main>
 
-  <!-- HEADER -->
   <div class="header">
     <div class="greeting" id="greeting">Good morning, Zeke</div>
     <div class="dateline">
@@ -171,9 +173,9 @@ label{font-size:12px;font-weight:600;letter-spacing:0.04em;text-transform:upperc
       <span>·</span>
       <div class="sync-pill"><div class="sync-dot" id="sync-dot"></div><span id="sync-label">Ready</span></div>
       <span>·</span>
-      <button class="refresh-btn" onclick="loadLive()">↻ Refresh</button>
+      <button class="hdr-btn" onclick="loadLive()">↻ Refresh</button>
       <span>·</span>
-      <button class="refresh-btn" onclick="signOut()">Sign out</button>
+      <button class="hdr-btn" onclick="signOut()">Sign out</button>
     </div>
   </div>
 
@@ -194,17 +196,17 @@ label{font-size:12px;font-weight:600;letter-spacing:0.04em;text-transform:upperc
     <div class="card">
       <div class="card-label" style="margin-bottom:1rem">To-Do List</div>
       <div class="todo-input-row">
-        <input type="text" id="todo-input" placeholder="Add a task..." onkeydown="if(event.key==='Enter')addTodo()" style="width:auto;flex:1">
-        <button class="btn btn-primary btn-sm" onclick="addTodo()">Add</button>
+        <input type="text" id="todo-input" placeholder="Add a task..." onkeydown="if(event.key==='Enter')addTodo()">
+        <button class="btn btn-primary btn-sm" onclick="addTodo()" style="margin-left:0.5rem">Add</button>
       </div>
       <div id="todo-list"><div class="loading"><div class="spinner"></div>Loading...</div></div>
     </div>
     <div class="card">
       <div class="card-header">
         <div class="card-label">Today's Calendar</div>
-        <button class="btn btn-sm" id="cal-connect-btn" onclick="initCalendar()">Connect</button>
+        <button class="btn btn-sm" id="cal-btn" onclick="connectCalendar()">Connect</button>
       </div>
-      <div id="calendar-content"><div style="font-size:13px;color:var(--text3)">Hit Connect to link your Google Calendar.</div></div>
+      <div id="cal-content"><div style="font-size:13px;color:var(--text3)">Hit Connect to link Google Calendar.</div></div>
     </div>
   </div>
 
@@ -212,14 +214,14 @@ label{font-size:12px;font-weight:600;letter-spacing:0.04em;text-transform:upperc
   <div class="full card">
     <div class="card-header">
       <div class="card-label">Quick Links</div>
-      <button class="btn btn-sm" onclick="toggleAddLink()" id="add-link-btn">+ Add</button>
+      <button class="btn btn-sm" id="add-link-btn" onclick="toggleLinkForm()">+ Add</button>
     </div>
     <div class="links-grid" id="links-grid"></div>
-    <div class="link-add-row" id="link-add-row">
-      <input type="text" id="link-name-input" placeholder="Name" style="width:auto">
-      <input type="text" id="link-url-input" placeholder="https://..." style="width:auto;flex:1">
+    <div class="link-add-form" id="link-add-form">
+      <input type="text" id="link-name" placeholder="Name" style="max-width:140px">
+      <input type="text" id="link-url" placeholder="https://...">
       <button class="btn btn-primary btn-sm" onclick="addLink()">Add</button>
-      <button class="btn btn-sm" onclick="toggleAddLink()">Cancel</button>
+      <button class="btn btn-sm" onclick="toggleLinkForm()">Cancel</button>
     </div>
   </div>
 
@@ -227,39 +229,51 @@ label{font-size:12px;font-weight:600;letter-spacing:0.04em;text-transform:upperc
   <div class="full card">
     <div class="card-header">
       <div class="card-label">Today's Workout</div>
-      <div id="workout-sync-hint" style="font-size:11px;color:var(--accent)"></div>
+      <span id="workout-logged-badge" style="font-size:11px;color:var(--accent);display:none">Logged ✓</span>
     </div>
     <div class="workout-controls">
-      <button class="location-btn active" id="loc-home" onclick="setLocation('home')">🏠 Home</button>
-      <button class="location-btn" id="loc-gym" onclick="setLocation('gym')">🏋️ Gym</button>
+      <button class="loc-btn active" id="loc-home" onclick="setLoc('home')">🏠 Home</button>
+      <button class="loc-btn" id="loc-gym" onclick="setLoc('gym')">🏋️ Gym</button>
       <select class="focus-select" id="focus-select">
-        <option value="">Pick a focus area...</option>
-        <option value="Chest & Push">Chest & Push</option>
-        <option value="Back & Pull">Back & Pull</option>
-        <option value="Legs">Legs</option>
-        <option value="Shoulders">Shoulders</option>
-        <option value="Arms (Biceps/Triceps)">Arms (Biceps/Triceps)</option>
-        <option value="Core/Abs">Core/Abs</option>
-        <option value="Cardio">Cardio</option>
-        <option value="Full Body">Full Body</option>
-        <option value="Rest Day">Rest Day</option>
+        <option value="">Select focus area...</option>
+        <option>Chest & Push</option>
+        <option>Back & Pull</option>
+        <option>Legs</option>
+        <option>Shoulders</option>
+        <option>Arms (Biceps/Triceps)</option>
+        <option>Core/Abs</option>
+        <option>Cardio</option>
+        <option>Full Body</option>
+        <option>Rest Day</option>
       </select>
-      <button class="btn btn-primary btn-sm" onclick="generateWorkout()">Generate Workout</button>
-      <button class="btn btn-sm" onclick="saveWorkoutLog()" id="save-workout-btn" style="display:none">Save to Log</button>
+      <button class="btn btn-primary btn-sm" onclick="generateWorkout()">Generate</button>
+      <button class="btn btn-sm" id="save-workout-btn" style="display:none" onclick="saveWorkout()">Save to Log</button>
     </div>
-    <div id="workout-plan-area"></div>
-    <div id="workout-history-area" style="display:none">
-      <div class="workout-history-section">
-        <div class="card-label" style="margin-bottom:0.75rem">Recent Workout Log</div>
-        <div id="workout-history-list"></div>
-      </div>
+    <div id="workout-output"></div>
+    <div id="workout-history" style="display:none;border-top:1px solid var(--border);padding-top:1rem;margin-top:1rem">
+      <div class="card-label" style="margin-bottom:0.75rem">Recent History</div>
+      <div id="workout-history-list"></div>
     </div>
   </div>
 
-  <!-- NATIONAL NEWS -->
-  <div class="full card">
-    <div class="card-label" style="margin-bottom:1rem">National News</div>
-    <div id="national-news"><div class="loading"><div class="spinner"></div>Loading headlines...</div></div>
+  <!-- NEWS GRID: 4 topics -->
+  <div class="grid-4">
+    <div class="card">
+      <div class="card-label" style="margin-bottom:1rem">Higher Education</div>
+      <div id="news-higher-ed"><div class="loading"><div class="spinner"></div>Loading...</div></div>
+    </div>
+    <div class="card">
+      <div class="card-label" style="margin-bottom:1rem">International Students</div>
+      <div id="news-intl"><div class="loading"><div class="spinner"></div>Loading...</div></div>
+    </div>
+    <div class="card">
+      <div class="card-label" style="margin-bottom:1rem">Education & Recruitment</div>
+      <div id="news-recruit"><div class="loading"><div class="spinner"></div>Loading...</div></div>
+    </div>
+    <div class="card">
+      <div class="card-label" style="margin-bottom:1rem">Philadelphia</div>
+      <div id="news-philly"><div class="loading"><div class="spinner"></div>Loading...</div></div>
+    </div>
   </div>
 
   <!-- JOURNAL -->
@@ -268,8 +282,8 @@ label{font-size:12px;font-weight:600;letter-spacing:0.04em;text-transform:upperc
       <div class="card-label">Daily Journal</div>
       <button class="btn btn-sm" onclick="saveJournal()">Save</button>
     </div>
-    <div class="journal-tabs" id="journal-tabs"></div>
-    <div id="journal-view"></div>
+    <div class="j-tabs" id="j-tabs"></div>
+    <div id="j-view"></div>
   </div>
 
 </main>
@@ -278,27 +292,27 @@ label{font-size:12px;font-weight:600;letter-spacing:0.04em;text-transform:upperc
 <script>
 // ── CONFIG ──
 const WEATHER_KEY='c1df8f029d391346e1594d808308f6e5';
-const GCAL_CLIENT_ID='840231870401-7hu1c8sjpiqrvshmrd4lg5gki6hcst6e.apps.googleusercontent.com';
-const GCAL_SCOPE='https://www.googleapis.com/auth/calendar.readonly https://www.googleapis.com/auth/spreadsheets https://www.googleapis.com/auth/drive.file';
-const CAL_ONLY_SCOPE='https://www.googleapis.com/auth/calendar.readonly';
-const CITY='Philadelphia,PA,US';
+const CLIENT_ID='840231870401-7hu1c8sjpiqrvshmrd4lg5gki6hcst6e.apps.googleusercontent.com';
+const SHEETS_SCOPE='https://www.googleapis.com/auth/spreadsheets https://www.googleapis.com/auth/drive.file';
+const CAL_SCOPE='https://www.googleapis.com/auth/calendar.readonly';
+const ALL_SCOPES=SHEETS_SCOPE+' '+CAL_SCOPE;
 
 const QUOTES=[
-  {text:"The secret of getting ahead is getting started.",author:"Mark Twain"},
-  {text:"It does not matter how slowly you go as long as you do not stop.",author:"Confucius"},
-  {text:"Small daily improvements are the key to staggering long-term results.",author:"Robin Sharma"},
-  {text:"Financial freedom is available to those who learn about it and work for it.",author:"Robert Kiyosaki"},
-  {text:"Do not save what is left after spending; instead spend what is left after saving.",author:"Warren Buffett"},
-  {text:"Either you run the day or the day runs you.",author:"Jim Rohn"},
-  {text:"Take care of your body. It's the only place you have to live.",author:"Jim Rohn"},
-  {text:"Push yourself, because no one else is going to do it for you.",author:"Unknown"},
-  {text:"Success is the sum of small efforts, repeated day in and day out.",author:"Robert Collier"},
-  {text:"Discipline is the bridge between goals and accomplishment.",author:"Jim Rohn"},
-  {text:"A budget is telling your money where to go instead of wondering where it went.",author:"Dave Ramsey"},
-  {text:"The groundwork of all happiness is health.",author:"Leigh Hunt"},
-  {text:"What you do today can improve all your tomorrows.",author:"Ralph Marston"},
-  {text:"You don't have to be great to start, but you have to start to be great.",author:"Zig Ziglar"},
-  {text:"The best time to plant a tree was 20 years ago. The second best time is now.",author:"Chinese Proverb"},
+  {t:"The secret of getting ahead is getting started.",a:"Mark Twain"},
+  {t:"Small daily improvements are the key to staggering long-term results.",a:"Robin Sharma"},
+  {t:"Financial freedom is available to those who learn about it and work for it.",a:"Robert Kiyosaki"},
+  {t:"Do not save what is left after spending; instead spend what is left after saving.",a:"Warren Buffett"},
+  {t:"Either you run the day or the day runs you.",a:"Jim Rohn"},
+  {t:"Take care of your body. It's the only place you have to live.",a:"Jim Rohn"},
+  {t:"Push yourself, because no one else is going to do it for you.",a:"Unknown"},
+  {t:"Success is the sum of small efforts, repeated day in and day out.",a:"Robert Collier"},
+  {t:"Discipline is the bridge between goals and accomplishment.",a:"Jim Rohn"},
+  {t:"A budget is telling your money where to go instead of wondering where it went.",a:"Dave Ramsey"},
+  {t:"What you do today can improve all your tomorrows.",a:"Ralph Marston"},
+  {t:"The groundwork of all happiness is health.",a:"Leigh Hunt"},
+  {t:"You don't have to be great to start, but you have to start to be great.",a:"Zig Ziglar"},
+  {t:"Education is the most powerful weapon which you can use to change the world.",a:"Nelson Mandela"},
+  {t:"The beautiful thing about learning is that no one can take it away from you.",a:"B.B. King"},
 ];
 
 const DEFAULT_LINKS=[
@@ -306,169 +320,152 @@ const DEFAULT_LINKS=[
 ];
 
 // ── STATE ──
-let accessToken=null,spreadsheetId=null,calToken=null;
-let workoutLocation='home',currentWorkoutPlan='';
-let journalViewDate=todayKey();
+let sheetsToken=null,calToken=null,sheetId=null;
 let todos=[],workoutLog=[],journal={},links=[...DEFAULT_LINKS];
+let workoutLoc='home',currentPlan='',journalDate=todayKey();
 
 // ── HELPERS ──
 function todayKey(){return new Date().toISOString().split('T')[0];}
-function fmtDate(d){return new Date(d+'T12:00:00').toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});}
+function fmtDate(d){try{return new Date(d+'T12:00:00').toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});}catch{return d;}}
 function timeAgo(s){const m=(Date.now()-new Date(s))/60000;return m<60?Math.round(m)+'m ago':m<1440?Math.round(m/60)+'h ago':Math.round(m/1440)+'d ago';}
 function setSyncStatus(s,l){document.getElementById('sync-dot').className='sync-dot '+s;document.getElementById('sync-label').textContent=l;}
+function showHint(id,msg){const el=document.getElementById(id);if(el){el.textContent=msg;setTimeout(()=>{if(el)el.textContent='';},2000);}}
 
-// ── AUTH (combined Google OAuth for Calendar + Sheets) ──
+// ── AUTH ──
 function signIn(){
   const base=window.location.href.split('?')[0].split('#')[0];
   window.location.href='https://accounts.google.com/o/oauth2/v2/auth?'+new URLSearchParams({
-    client_id:GCAL_CLIENT_ID,redirect_uri:base,response_type:'token',scope:GCAL_SCOPE,prompt:'select_account'
+    client_id:CLIENT_ID,redirect_uri:base,response_type:'token',
+    scope:ALL_SCOPES,prompt:'consent',access_type:'online'
   });
 }
 function signOut(){
-  accessToken=null;calToken=null;
-  localStorage.removeItem('nd_token');localStorage.removeItem('nd_token_exp');
-  localStorage.removeItem('nd_sheet_id');
+  sheetsToken=null;calToken=null;
+  ['nd_token','nd_token_exp','nd_sheet_id'].forEach(k=>localStorage.removeItem(k));
   document.getElementById('login-screen').style.display='flex';
   document.getElementById('app').style.display='none';
 }
 function handleCallback(){
-  const p=new URLSearchParams(window.location.hash.substring(1));
-  const t=p.get('access_token'),e=p.get('expires_in');
-  if(t){
-    accessToken=t;calToken=t;
-    localStorage.setItem('nd_token',t);
-    localStorage.setItem('nd_token_exp',Date.now()+parseInt(e)*1000);
-    history.replaceState(null,'',window.location.pathname);
+  const hash=window.location.hash.substring(1);
+  if(!hash)return false;
+  const p=new URLSearchParams(hash);
+  const t=p.get('access_token'),e=p.get('expires_in'),sc=p.get('scope')||'';
+  if(!t)return false;
+  sheetsToken=t;
+  if(sc.includes('calendar'))calToken=t;
+  localStorage.setItem('nd_token',t);
+  localStorage.setItem('nd_token_exp',String(Date.now()+parseInt(e)*1000));
+  localStorage.setItem('nd_scope',sc);
+  history.replaceState(null,'',window.location.pathname);
+  return true;
+}
+function loadStoredToken(){
+  const t=localStorage.getItem('nd_token'),e=localStorage.getItem('nd_token_exp'),sc=localStorage.getItem('nd_scope')||'';
+  if(t&&e&&Date.now()<parseInt(e)){
+    sheetsToken=t;
+    if(sc.includes('calendar'))calToken=t;
     return true;
   }
   return false;
 }
-function loadStoredToken(){
-  const t=localStorage.getItem('nd_token'),e=localStorage.getItem('nd_token_exp');
-  if(t&&e&&Date.now()<parseInt(e)){accessToken=t;calToken=t;return true;}
-  return false;
+function connectCalendar(){
+  // Re-auth requesting all scopes including calendar
+  signIn();
 }
-
-// Calendar-only reconnect (for calendar button)
-function initCalendar(){signIn();}
 
 // ── SHEETS ──
 async function sheetsReq(method,ep,body){
   const r=await fetch('https://sheets.googleapis.com/v4/spreadsheets'+ep,{
-    method,headers:{'Authorization':'Bearer '+accessToken,'Content-Type':'application/json'},
+    method,
+    headers:{'Authorization':'Bearer '+sheetsToken,'Content-Type':'application/json'},
     body:body?JSON.stringify(body):undefined
   });
   if(!r.ok){const e=await r.json();throw new Error(e.error?.message||'Sheets error');}
   return r.json();
 }
-async function driveReq(ep){
-  const r=await fetch('https://www.googleapis.com/drive/v3'+ep,{headers:{'Authorization':'Bearer '+accessToken}});
-  if(!r.ok)throw new Error('Drive error');
+async function driveSearch(){
+  const r=await fetch("/files?q=name='Daily Dashboard Data' and mimeType='application/vnd.google-apps.spreadsheet' and trashed=false&fields=files(id)".replace('/',`https://www.googleapis.com/drive/v3/`),{headers:{'Authorization':'Bearer '+sheetsToken}});
   return r.json();
 }
 
 async function findOrCreateSheet(){
-  spreadsheetId=localStorage.getItem('nd_sheet_id')||null;
-  if(spreadsheetId){
-    try{await sheetsReq('GET','/'+spreadsheetId+'?fields=spreadsheetId');return;}
-    catch{spreadsheetId=null;localStorage.removeItem('nd_sheet_id');}
-  }
-  const s=await driveReq("/files?q=name='Daily Dashboard Data' and mimeType='application/vnd.google-apps.spreadsheet' and trashed=false&fields=files(id)");
-  if(s.files?.length){spreadsheetId=s.files[0].id;localStorage.setItem('nd_sheet_id',spreadsheetId);return;}
+  sheetId=localStorage.getItem('nd_sheet_id');
+  if(sheetId){try{await sheetsReq('GET','/'+sheetId+'?fields=spreadsheetId');return;}catch{sheetId=null;localStorage.removeItem('nd_sheet_id');}}
+  const s=await fetch('https://www.googleapis.com/drive/v3/files?q='+encodeURIComponent("name='Daily Dashboard Data' and mimeType='application/vnd.google-apps.spreadsheet' and trashed=false")+'&fields=files(id)',{headers:{'Authorization':'Bearer '+sheetsToken}});
+  const sd=await s.json();
+  if(sd.files?.length){sheetId=sd.files[0].id;localStorage.setItem('nd_sheet_id',sheetId);return;}
   const c=await sheetsReq('POST','',{
     properties:{title:'Daily Dashboard Data'},
-    sheets:[{properties:{title:'Todos'}},{properties:{title:'WorkoutLog'}},{properties:{title:'Journal'}},{properties:{title:'Links'}}]
+    sheets:[
+      {properties:{title:'Todos'}},
+      {properties:{title:'WorkoutLog'}},
+      {properties:{title:'Journal'}},
+      {properties:{title:'Links'}}
+    ]
   });
-  spreadsheetId=c.spreadsheetId;localStorage.setItem('nd_sheet_id',spreadsheetId);
-  await sheetsReq('PUT','/'+spreadsheetId+'/values/Todos!A1:D1?valueInputOption=RAW',{values:[['id','text','done','date']]});
-  await sheetsReq('PUT','/'+spreadsheetId+'/values/WorkoutLog!A1:E1?valueInputOption=RAW',{values:[['date','focus','location','plan','logged']]});
-  await sheetsReq('PUT','/'+spreadsheetId+'/values/Journal!A1:B1?valueInputOption=RAW',{values:[['date','entry']]});
-  await sheetsReq('PUT','/'+spreadsheetId+'/values/Links!A1:C1?valueInputOption=RAW',{values:[['name','url','icon']]});
+  sheetId=c.spreadsheetId;localStorage.setItem('nd_sheet_id',sheetId);
+  await sheetsReq('PUT','/'+sheetId+'/values/Todos!A1:D1?valueInputOption=RAW',{values:[['id','text','done','date']]});
+  await sheetsReq('PUT','/'+sheetId+'/values/WorkoutLog!A1:D1?valueInputOption=RAW',{values:[['date','focus','location','plan']]});
+  await sheetsReq('PUT','/'+sheetId+'/values/Journal!A1:B1?valueInputOption=RAW',{values:[['date','entry']]});
+  await sheetsReq('PUT','/'+sheetId+'/values/Links!A1:C1?valueInputOption=RAW',{values:[['name','url','icon']]});
 }
 
-async function loadAllData(){
+async function loadSheetData(){
   setSyncStatus('syncing','Loading...');
   try{
     await findOrCreateSheet();
-    // Todos
-    const tr=await sheetsReq('GET','/'+spreadsheetId+'/values/Todos!A2:D1000');
+    const [tr,wr,jr,lr]=await Promise.all([
+      sheetsReq('GET','/'+sheetId+'/values/Todos!A2:D1000'),
+      sheetsReq('GET','/'+sheetId+'/values/WorkoutLog!A2:D200'),
+      sheetsReq('GET','/'+sheetId+'/values/Journal!A2:B1000'),
+      sheetsReq('GET','/'+sheetId+'/values/Links!A2:C100'),
+    ]);
     todos=(tr.values||[]).map(r=>({id:r[0],text:r[1],done:r[2]==='true',date:r[3]})).filter(t=>t.text);
-    // Workout log
-    const wr=await sheetsReq('GET','/'+spreadsheetId+'/values/WorkoutLog!A2:E100');
     workoutLog=(wr.values||[]).map(r=>({date:r[0],focus:r[1],location:r[2],plan:r[3]})).filter(w=>w.date);
-    // Journal
-    const jr=await sheetsReq('GET','/'+spreadsheetId+'/values/Journal!A2:B500');
     journal={};(jr.values||[]).forEach(r=>{if(r[0]&&r[1])journal[r[0]]=r[1];});
-    // Links
-    const lr=await sheetsReq('GET','/'+spreadsheetId+'/values/Links!A2:C100');
     const savedLinks=(lr.values||[]).map(r=>({name:r[0],url:r[1],icon:r[2]||'🔗'})).filter(l=>l.name&&l.url);
     if(savedLinks.length)links=savedLinks;
     setSyncStatus('synced','Synced');
     renderTodos();renderWorkoutHistory();renderJournal();renderLinks();
-    // Check if today's workout already logged
-    const todayLog=workoutLog.find(w=>w.date===todayKey());
-    if(todayLog){
-      currentWorkoutPlan=todayLog.plan;
-      document.getElementById('workout-plan-area').innerHTML=`<div class="workout-plan">${formatWorkoutPlan(todayLog.plan)}</div>`;
-      document.getElementById('workout-sync-hint').textContent='Today\'s workout logged ✓';
+    // Show today's workout if already logged
+    const todayW=workoutLog.find(w=>w.date===todayKey());
+    if(todayW){
+      currentPlan=todayW.plan;
+      renderWorkoutPlan(todayW.plan);
+      document.getElementById('workout-logged-badge').style.display='';
     }
-  }catch(e){setSyncStatus('error','Sync error');console.error(e);}
+  }catch(e){setSyncStatus('error','Sync error');console.error('Sheet error:',e);}
 }
 
-async function saveTodosToSheet(){
-  setSyncStatus('syncing','Saving...');
-  try{
-    await sheetsReq('PUT','/'+spreadsheetId+'/values/Todos!A1:D1000?valueInputOption=RAW',{
-      values:[['id','text','done','date'],...todos.map(t=>[t.id,t.text,t.done,t.date])]
-    });
-    setSyncStatus('synced','Saved');
-  }catch(e){setSyncStatus('error','Save failed');}
+async function saveTodos(){
+  try{await sheetsReq('PUT','/'+sheetId+'/values/Todos!A1:D1000?valueInputOption=RAW',{values:[['id','text','done','date'],...todos.map(t=>[t.id,t.text,t.done,t.date])]});}
+  catch(e){console.error(e);}
 }
-
-async function saveWorkoutLogToSheet(){
-  setSyncStatus('syncing','Saving...');
-  try{
-    await sheetsReq('PUT','/'+spreadsheetId+'/values/WorkoutLog!A1:E100?valueInputOption=RAW',{
-      values:[['date','focus','location','plan','logged'],...workoutLog.map(w=>[w.date,w.focus,w.location,w.plan,new Date().toISOString()])]
-    });
-    setSyncStatus('synced','Saved');
-  }catch(e){setSyncStatus('error','Save failed');}
+async function saveWorkoutLog(){
+  try{await sheetsReq('PUT','/'+sheetId+'/values/WorkoutLog!A1:D200?valueInputOption=RAW',{values:[['date','focus','location','plan'],...workoutLog.map(w=>[w.date,w.focus,w.location,w.plan])]});}
+  catch(e){console.error(e);}
 }
-
-async function saveJournalToSheet(){
-  setSyncStatus('syncing','Saving...');
-  try{
-    await sheetsReq('PUT','/'+spreadsheetId+'/values/Journal!A1:B500?valueInputOption=RAW',{
-      values:[['date','entry'],...Object.entries(journal).sort((a,b)=>b[0].localeCompare(a[0]))]
-    });
-    setSyncStatus('synced','Saved');
-  }catch(e){setSyncStatus('error','Save failed');}
+async function saveJournalSheet(){
+  try{await sheetsReq('PUT','/'+sheetId+'/values/Journal!A1:B1000?valueInputOption=RAW',{values:[['date','entry'],...Object.entries(journal).sort((a,b)=>b[0].localeCompare(a[0]))]});}
+  catch(e){console.error(e);}
 }
-
-async function saveLinksToSheet(){
-  setSyncStatus('syncing','Saving...');
-  try{
-    await sheetsReq('PUT','/'+spreadsheetId+'/values/Links!A1:C100?valueInputOption=RAW',{
-      values:[['name','url','icon'],...links.map(l=>[l.name,l.url,l.icon])]
-    });
-    setSyncStatus('synced','Saved');
-  }catch(e){setSyncStatus('error','Save failed');}
+async function saveLinksSheet(){
+  try{await sheetsReq('PUT','/'+sheetId+'/values/Links!A1:C100?valueInputOption=RAW',{values:[['name','url','icon'],...links.map(l=>[l.name,l.url,l.icon])]});}
+  catch(e){console.error(e);}
 }
 
 // ── TIME ──
 function updateTime(){
-  const now=new Date(),h=now.getHours();
+  const h=new Date().getHours();
   document.getElementById('greeting').textContent=(h<12?'Good morning':h<17?'Good afternoon':'Good evening')+', Zeke';
-  document.getElementById('time-display').textContent=now.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
+  document.getElementById('time-display').textContent=new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
 }
-function setDateline(){
-  document.getElementById('dateline').textContent=new Date().toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
-}
+function setDateline(){document.getElementById('dateline').textContent=new Date().toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});}
 
 // ── WEATHER ──
 async function loadWeather(){
   try{
-    const r=await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${CITY}&appid=${WEATHER_KEY}&units=imperial`);
+    const r=await fetch(`https://api.openweathermap.org/data/2.5/weather?q=Philadelphia,PA,US&appid=${WEATHER_KEY}&units=imperial`);
     const d=await r.json();
     if(d.cod!==200)throw new Error(d.message);
     const temp=Math.round(d.main.temp),feels=Math.round(d.main.feels_like),high=Math.round(d.main.temp_max),low=Math.round(d.main.temp_min);
@@ -478,163 +475,169 @@ async function loadWeather(){
       <div class="weather-icon">${icon}</div>
       <div class="weather-row"><div class="weather-temp">${temp}°</div><div><div style="font-size:15px;color:var(--text2)">${desc.charAt(0).toUpperCase()+desc.slice(1)}</div><div style="font-size:13px;color:var(--text3)">Feels like ${feels}°</div></div></div>
       <div class="weather-details"><div>↑ ${high}°</div><div>↓ ${low}°</div><div>💧 ${hum}%</div><div>💨 ${wind} mph</div></div>`;
-  }catch(e){document.getElementById('weather-content').innerHTML=`<div class="error-msg">Could not load weather.</div>`;}
+  }catch(e){document.getElementById('weather-content').innerHTML=`<div class="err">Weather unavailable.</div>`;}
 }
 
 // ── NEWS ──
-async function loadNews(query,elId){
+async function loadNews(query,elId,count=4){
+  const el=document.getElementById(elId);
   try{
-    const feed=query
-      ?`https://news.google.com/rss/search?q=${encodeURIComponent(query)}+when:1d&hl=en-US&gl=US&ceid=US:en`
-      :`https://news.google.com/rss?hl=en-US&gl=US&ceid=US:en`;
+    const feed=`https://news.google.com/rss/search?q=${encodeURIComponent(query)}+when:2d&hl=en-US&gl=US&ceid=US:en`;
     const proxy=`https://api.allorigins.win/get?url=${encodeURIComponent(feed)}`;
     const r=await fetch(proxy);
     const data=await r.json();
     const parser=new DOMParser();
     const xml=parser.parseFromString(data.contents,'text/xml');
-    const items=Array.from(xml.querySelectorAll('item')).slice(0,query?4:6);
+    const items=Array.from(xml.querySelectorAll('item')).slice(0,count);
     if(!items.length)throw new Error('No items');
-    document.getElementById(elId).innerHTML=items.map(item=>{
-      const title=item.querySelector('title')?.textContent||'';
+    el.innerHTML=items.map(item=>{
+      const title=(item.querySelector('title')?.textContent||'').replace(/ - [^-]+$/,'');
       const link=item.querySelector('link')?.textContent||'#';
       const pubDate=item.querySelector('pubDate')?.textContent||'';
-      const source=item.querySelector('source')?.textContent||'Google News';
-      const clean=title.replace(/ - [^-]+$/,'');
-      return`<div class="news-item"><div class="news-source">${source}</div><div class="news-title"><a href="${link}" target="_blank">${clean}</a></div><div class="news-time">${pubDate?timeAgo(new Date(pubDate).toISOString()):''}</div></div>`;
+      const source=item.querySelector('source')?.textContent||'';
+      return`<div class="news-item">
+        ${source?`<div class="news-source">${source}</div>`:''}
+        <div class="news-title"><a href="${link}" target="_blank">${title}</a></div>
+        ${pubDate?`<div class="news-time">${timeAgo(new Date(pubDate).toISOString())}</div>`:''}
+      </div>`;
     }).join('');
-  }catch{document.getElementById(elId).innerHTML='<div class="error-msg">Could not load news. Try refreshing.</div>';}
+  }catch{el.innerHTML='<div class="err">Could not load. Try refreshing.</div>';}
 }
 
 // ── CALENDAR ──
 async function loadCalendar(){
-  if(!calToken)return;
-  document.getElementById('cal-connect-btn').textContent='Refresh';
-  document.getElementById('calendar-content').innerHTML='<div class="loading"><div class="spinner"></div>Loading events...</div>';
+  if(!calToken){document.getElementById('cal-content').innerHTML='<div style="font-size:13px;color:var(--text3)">Hit Connect to link Google Calendar.</div>';return;}
+  document.getElementById('cal-btn').textContent='Refresh';
+  document.getElementById('cal-content').innerHTML='<div class="loading"><div class="spinner"></div>Loading events...</div>';
   try{
     const now=new Date();
     const start=new Date(now.getFullYear(),now.getMonth(),now.getDate()).toISOString();
     const end=new Date(now.getFullYear(),now.getMonth(),now.getDate()+1).toISOString();
-    const d=await (await fetch(`https://www.googleapis.com/calendar/v3/calendars/primary/events?timeMin=${start}&timeMax=${end}&singleEvents=true&orderBy=startTime&maxResults=15`,{headers:{'Authorization':'Bearer '+calToken}})).json();
+    const r=await fetch(`https://www.googleapis.com/calendar/v3/calendars/primary/events?timeMin=${encodeURIComponent(start)}&timeMax=${encodeURIComponent(end)}&singleEvents=true&orderBy=startTime&maxResults=15`,{headers:{'Authorization':'Bearer '+calToken}});
+    const d=await r.json();
     if(d.error)throw new Error(d.error.message);
     const events=d.items||[];
-    document.getElementById('calendar-content').innerHTML=events.length
+    document.getElementById('cal-content').innerHTML=events.length
       ?events.map(e=>{
-          const isAll=!e.start.dateTime;
+          const isAll=!e.start?.dateTime;
           const t=isAll?'All day':new Date(e.start.dateTime).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
           return`<div class="cal-item"><div class="cal-dot"></div><div style="flex:1"><div class="cal-title">${e.summary||'Untitled'}</div>${e.location?`<div class="cal-sub">${e.location}</div>`:''}</div><div class="cal-time">${t}</div></div>`;
         }).join('')
-      :'<div style="font-size:13px;color:var(--text3);padding:0.5rem 0">No events today.</div>';
-  }catch{document.getElementById('calendar-content').innerHTML='<div class="error-msg">Session expired. <button class="btn btn-sm" onclick="initCalendar()" style="margin-left:6px">Reconnect</button></div>';}
+      :'<div style="font-size:13px;color:var(--text3)">No events today.</div>';
+  }catch(e){
+    console.error('Calendar error:',e);
+    document.getElementById('cal-content').innerHTML=`<div class="err">Could not load calendar. <button class="btn btn-sm" onclick="connectCalendar()" style="margin-left:6px">Reconnect</button></div>`;
+  }
 }
 
 // ── QUOTE ──
 function loadQuote(){
   const q=QUOTES[new Date().getDate()%QUOTES.length];
-  document.getElementById('quote-content').innerHTML=`<div class="quote-text">"${q.text}"</div><div class="quote-author">— ${q.author}</div>`;
+  document.getElementById('quote-content').innerHTML=`<div class="quote-text">"${q.t}"</div><div class="quote-author">— ${q.a}</div>`;
 }
 
-// ── TO-DO ──
+// ── TODO ──
 async function addTodo(){
-  const input=document.getElementById('todo-input');
-  const text=input.value.trim();if(!text)return;
+  const inp=document.getElementById('todo-input');
+  const text=inp.value.trim();if(!text)return;
   todos.unshift({id:String(Date.now()),text,done:false,date:todayKey()});
-  input.value='';renderTodos();
-  await saveTodosToSheet();
+  inp.value='';renderTodos();
+  await saveTodos();
 }
 async function toggleTodo(id){
   todos=todos.map(t=>t.id===id?{...t,done:!t.done}:t);
-  renderTodos();await saveTodosToSheet();
+  renderTodos();await saveTodos();
 }
 async function deleteTodo(id){
   todos=todos.filter(t=>t.id!==id);
-  renderTodos();await saveTodosToSheet();
+  renderTodos();await saveTodos();
 }
 function renderTodos(){
   const el=document.getElementById('todo-list');
-  if(!todos.length){el.innerHTML='<div style="font-size:13px;color:var(--text3);padding:0.5rem 0">No tasks yet.</div>';return;}
+  if(!todos.length){el.innerHTML='<div style="font-size:13px;color:var(--text3)">No tasks yet.</div>';return;}
   el.innerHTML=todos.map(t=>`
     <div class="todo-item">
       <div class="todo-check ${t.done?'done':''}" onclick="toggleTodo('${t.id}')"></div>
-      <div class="todo-text ${t.done?'done':''}" style="flex:1">${t.text}</div>
+      <div class="todo-text ${t.done?'done':''}">${t.text}</div>
       <div style="font-size:11px;color:var(--text3);margin-right:4px">${fmtDate(t.date)}</div>
       <button class="btn btn-danger" onclick="deleteTodo('${t.id}')">✕</button>
     </div>`).join('');
 }
 
 // ── WORKOUT ──
-function setLocation(loc){
-  workoutLocation=loc;
+function setLoc(loc){
+  workoutLoc=loc;
   document.getElementById('loc-home').classList.toggle('active',loc==='home');
   document.getElementById('loc-gym').classList.toggle('active',loc==='gym');
 }
 
 async function generateWorkout(){
   const focus=document.getElementById('focus-select').value;
-  if(!focus){alert('Please select a focus area.');return;}
-  const area=document.getElementById('workout-plan-area');
-  area.innerHTML='<div class="loading"><div class="spinner"></div>Generating your workout with AI...</div>';
+  if(!focus){alert('Please select a focus area first.');return;}
+  const out=document.getElementById('workout-output');
+  out.innerHTML='<div class="loading"><div class="spinner"></div>Generating your workout...</div>';
   document.getElementById('save-workout-btn').style.display='none';
+  const recentHistory=workoutLog.slice(0,5).map(w=>`${w.date}: ${w.focus} (${w.location})`).join(', ')||'None yet';
+  const prompt=`You are Zeke's personal trainer. Create a specific workout plan.
 
-  // Build recent history context
-  const recentFocus=workoutLog.slice(0,5).map(w=>`${w.date}: ${w.focus}`).join(', ');
+Location: ${workoutLoc==='gym'?'Gym — full equipment (barbells, dumbbells, cables, machines, squat rack, pull-up bar)':'Home — minimal equipment (bodyweight, resistance bands, dumbbells if available)'}
+Focus area: ${focus}
+Recent workouts: ${recentHistory}
 
-  const prompt=`You are a personal trainer creating a specific workout plan for Zeke.
+Format the workout as follows:
+**Warm-Up** (3-5 min): List 2-3 specific warm-up exercises
 
-Location: ${workoutLocation==='gym'?'Gym (full equipment available: barbells, dumbbells, cables, machines, squat rack)':'Home (minimal equipment: bodyweight, resistance bands, dumbbells if available)'}
-Focus: ${focus}
-Recent workouts: ${recentFocus||'None yet'}
-Today's date: ${todayKey()}
+**Main Workout**: List 5-7 exercises with:
+- Exercise name
+- Sets x Reps (be specific, e.g. "4 sets x 8-10 reps")
+- Rest period between sets
+- Any form tips
 
-Create a complete workout with:
-1. A warm-up (2-3 minutes)
-2. Main workout (5-7 exercises with specific sets, reps, and rest periods)
-3. Cool-down stretch (2 minutes)
+**Cool-Down** (3-5 min): List 2-3 stretches
 
-Be very specific with reps and sets. Format clearly with exercise names bolded. Keep it practical and achievable in 45-60 minutes. If it's a Rest Day, suggest active recovery activities.`;
+Keep it achievable in 45-60 minutes. Be encouraging but direct. If Rest Day, suggest active recovery.`;
 
   try{
     const res=await fetch('https://api.anthropic.com/v1/messages',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        model:'claude-sonnet-4-20250514',
-        max_tokens:1000,
-        messages:[{role:'user',content:prompt}]
-      })
+      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:prompt}]})
     });
     const data=await res.json();
-    const plan=data.content?.[0]?.text||'Could not generate workout.';
-    currentWorkoutPlan=plan;
-    area.innerHTML=`<div class="workout-plan">${formatWorkoutPlan(plan)}</div>`;
+    const plan=data.content?.[0]?.text;
+    if(!plan)throw new Error('No response');
+    currentPlan=plan;
+    renderWorkoutPlan(plan);
     document.getElementById('save-workout-btn').style.display='';
-    document.getElementById('save-workout-btn').textContent='Save to Log';
   }catch(e){
-    area.innerHTML='<div class="error-msg">Could not generate workout. Try again.</div>';
+    out.innerHTML='<div class="err">Could not generate workout. Try again.</div>';
+    console.error(e);
   }
 }
 
-function formatWorkoutPlan(text){
-  return text
+function renderWorkoutPlan(text){
+  const html=text
     .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
     .replace(/\*(.+?)\*/g,'<em>$1</em>')
-    .replace(/#{1,3}\s+(.+)/g,'<strong style="font-size:14px;color:var(--text)">$1</strong>')
+    .replace(/^#{1,3}\s+(.+)$/gm,'<strong style="color:var(--text)">$1</strong>')
     .replace(/\n/g,'<br>');
+  document.getElementById('workout-output').innerHTML=`<div class="workout-plan">${html}</div>`;
 }
 
-async function saveWorkoutLog(){
+async function saveWorkout(){
   const focus=document.getElementById('focus-select').value||'General';
-  const existing=workoutLog.findIndex(w=>w.date===todayKey());
-  const entry={date:todayKey(),focus,location:workoutLocation,plan:currentWorkoutPlan};
-  if(existing>=0)workoutLog[existing]=entry;else workoutLog.unshift(entry);
+  const entry={date:todayKey(),focus,location:workoutLoc,plan:currentPlan};
+  const idx=workoutLog.findIndex(w=>w.date===todayKey());
+  if(idx>=0)workoutLog[idx]=entry;else workoutLog.unshift(entry);
   workoutLog=workoutLog.slice(0,60);
   document.getElementById('save-workout-btn').textContent='Saved ✓';
-  document.getElementById('workout-sync-hint').textContent='Today\'s workout logged ✓';
+  document.getElementById('workout-logged-badge').style.display='';
   renderWorkoutHistory();
-  await saveWorkoutLogToSheet();
+  await saveWorkoutLog();
 }
 
 function renderWorkoutHistory(){
-  const area=document.getElementById('workout-history-area');
+  const area=document.getElementById('workout-history');
   const list=document.getElementById('workout-history-list');
   if(!workoutLog.length){area.style.display='none';return;}
   area.style.display='';
@@ -646,79 +649,76 @@ function renderWorkoutHistory(){
 }
 
 // ── JOURNAL ──
-async function saveJournal(){
-  const text=document.getElementById('journal-textarea')?.value?.trim();
-  if(!text)return;
-  journal[todayKey()]=text;
-  const hint=document.getElementById('journal-saved');
-  if(hint){hint.textContent='Saved';setTimeout(()=>hint.textContent='',2000);}
-  renderJournal();
-  await saveJournalToSheet();
-}
-
-let journalTimer=null;
+let jTimer=null;
 function autoSaveJournal(){
-  clearTimeout(journalTimer);
-  journalTimer=setTimeout(async()=>{
-    const text=document.getElementById('journal-textarea')?.value?.trim();
-    if(text!==undefined){journal[todayKey()]=text;await saveJournalToSheet();const h=document.getElementById('journal-saved');if(h){h.textContent='Saved';setTimeout(()=>h.textContent='',2000);}}
+  clearTimeout(jTimer);
+  jTimer=setTimeout(async()=>{
+    const text=document.getElementById('j-textarea')?.value;
+    if(text!==undefined){journal[todayKey()]=text;await saveJournalSheet();showHint('j-saved','Saved');}
   },1500);
 }
-
+async function saveJournal(){
+  const text=document.getElementById('j-textarea')?.value?.trim();
+  if(text===undefined)return;
+  journal[todayKey()]=text;
+  renderJournal();
+  showHint('j-saved','Saved');
+  await saveJournalSheet();
+}
 function renderJournal(){
-  const dates=Object.keys(journal).sort().reverse().slice(0,7);
-  if(!dates.includes(todayKey()))dates.unshift(todayKey());
-  document.getElementById('journal-tabs').innerHTML=dates.map(d=>`
-    <button class="j-tab ${d===journalViewDate?'active':''}" onclick="journalViewDate='${d}';renderJournal()">
+  const dates=[...new Set([todayKey(),...Object.keys(journal).sort().reverse().slice(0,6)])];
+  document.getElementById('j-tabs').innerHTML=dates.map(d=>`
+    <button class="j-tab ${d===journalDate?'active':''}" onclick="journalDate='${d}';renderJournal()">
       ${d===todayKey()?'Today':fmtDate(d)}
     </button>`).join('');
-  const view=document.getElementById('journal-view');
-  if(journalViewDate===todayKey()){
-    view.innerHTML=`<textarea id="journal-textarea" placeholder="How's today going? Thoughts, goals, reflections..." rows="5" oninput="autoSaveJournal()">${journal[todayKey()]||''}</textarea><div class="saved-hint" id="journal-saved"></div>`;
+  const view=document.getElementById('j-view');
+  if(journalDate===todayKey()){
+    view.innerHTML=`<textarea id="j-textarea" placeholder="How's today going? Thoughts, goals, reflections..." rows="5" oninput="autoSaveJournal()">${journal[todayKey()]||''}</textarea><div class="saved-hint" id="j-saved"></div>`;
   }else{
-    const entry=journal[journalViewDate];
-    view.innerHTML=entry
-      ?`<div class="journal-entry-view">${entry}</div>`
-      :'<div style="font-size:13px;color:var(--text3);padding:0.5rem 0">No entry for this day.</div>';
+    view.innerHTML=journal[journalDate]
+      ?`<div class="j-entry-view">${journal[journalDate]}</div>`
+      :'<div style="font-size:13px;color:var(--text3)">No entry for this day.</div>';
   }
 }
 
 // ── LINKS ──
 function renderLinks(){
   document.getElementById('links-grid').innerHTML=links.map((l,i)=>`
-    <div style="position:relative">
+    <div class="link-card">
       <a href="${l.url}" target="_blank" class="link-item">
         <div class="link-icon">${l.icon||'🔗'}</div>
         <div class="link-name">${l.name}</div>
       </a>
-      <button class="btn btn-danger" style="position:absolute;top:3px;right:3px;padding:1px 4px;font-size:10px" onclick="deleteLink(${i})">✕</button>
+      <button class="link-del" onclick="deleteLink(${i})">✕</button>
     </div>`).join('');
 }
-async function deleteLink(i){links.splice(i,1);renderLinks();await saveLinksToSheet();}
-function toggleAddLink(){
-  const row=document.getElementById('link-add-row');
+async function deleteLink(i){links.splice(i,1);renderLinks();await saveLinksSheet();}
+function toggleLinkForm(){
+  const f=document.getElementById('link-add-form');
   const btn=document.getElementById('add-link-btn');
-  const open=row.style.display==='none'||row.style.display==='';
-  row.style.display=open?'flex':'none';
+  const open=f.style.display!=='flex';
+  f.style.display=open?'flex':'none';
   btn.textContent=open?'Cancel':'+ Add';
 }
 async function addLink(){
-  const name=document.getElementById('link-name-input').value.trim();
-  const url=document.getElementById('link-url-input').value.trim();
+  const name=document.getElementById('link-name').value.trim();
+  const url=document.getElementById('link-url').value.trim();
   if(!name||!url)return;
-  const icon=url.includes('github')?'🐙':url.includes('google')?'📅':url.includes('chase')?'💳':url.includes('psecu')?'🏦':url.includes('drexel')?'🎓':'🔗';
+  const icon=url.includes('github')?'🐙':url.includes('google')?'📅':url.includes('chase')?'💳':url.includes('psecu')?'🏦':url.includes('drexel')?'🎓':url.includes('linkedin')?'💼':'🔗';
   links.push({name,url:url.startsWith('http')?url:'https://'+url,icon});
-  document.getElementById('link-name-input').value='';
-  document.getElementById('link-url-input').value='';
-  toggleAddLink();
-  renderLinks();
-  await saveLinksToSheet();
+  document.getElementById('link-name').value='';
+  document.getElementById('link-url').value='';
+  toggleLinkForm();renderLinks();
+  await saveLinksSheet();
 }
 
 // ── LIVE DATA ──
 function loadLive(){
   loadWeather();
-  loadNews(null,'national-news');
+  loadNews('higher education university college','news-higher-ed',4);
+  loadNews('international students visa university','news-intl',4);
+  loadNews('education recruitment enrollment admissions','news-recruit',4);
+  loadNews('Philadelphia news','news-philly',4);
   if(calToken)loadCalendar();
 }
 
@@ -726,13 +726,13 @@ function loadLive(){
 async function init(){
   const fromCallback=handleCallback();
   const hasToken=fromCallback||loadStoredToken();
-  if(hasToken){
-    document.getElementById('login-screen').style.display='none';
-    document.getElementById('app').style.display='block';
-    setDateline();updateTime();setInterval(updateTime,30000);
-    loadQuote();loadLive();
-    await loadAllData();
-  }
+  if(!hasToken){return;}
+  document.getElementById('login-screen').style.display='none';
+  document.getElementById('app').style.display='block';
+  setDateline();updateTime();setInterval(updateTime,30000);
+  loadQuote();
+  loadLive();
+  await loadSheetData();
 }
 init();
 </script>

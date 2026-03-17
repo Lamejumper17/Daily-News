@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Good Morning, Zeke</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f5f3ee;--surface:#fff;--surface2:#f0ede7;
+  --border:rgba(60,55,45,0.12);--border-med:rgba(60,55,45,0.22);
+  --text:#1a1814;--text2:#6b6660;--text3:#9c9690;
+  --accent:#2d5a3d;--accent-light:#e8f0ea;
+  --radius:12px;--radius-sm:8px;
+  --shadow:0 2px 12px rgba(0,0,0,0.06),0 1px 3px rgba(0,0,0,0.04)
+}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:15px;line-height:1.6}
+main{padding:2rem;max-width:1000px;margin:0 auto}
+
+/* HEADER */
+.header{margin-bottom:2rem}
+.greeting{font-family:'DM Serif Display',serif;font-size:2.4rem;letter-spacing:-0.03em;line-height:1.1;margin-bottom:0.25rem}
+.dateline{font-size:14px;color:var(--text3);display:flex;align-items:center;gap:0.75rem}
+.refresh-btn{background:none;border:none;font-size:12px;color:var(--text3);cursor:pointer;font-family:'DM Sans',sans-serif;padding:0;display:flex;align-items:center;gap:4px}
+.refresh-btn:hover{color:var(--accent)}
+
+/* GRID */
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:1.25rem}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.25rem;margin-bottom:1.25rem}
+.full{margin-bottom:1.25rem}
+
+/* CARD */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.5rem;height:100%}
+.card-label{font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--text3);margin-bottom:1rem}
+
+/* WEATHER */
+.weather-main{display:flex;align-items:flex-end;gap:1rem;margin-bottom:0.75rem}
+.weather-temp{font-family:'DM Serif Display',serif;font-size:4rem;letter-spacing:-0.04em;line-height:1}
+.weather-desc{font-size:15px;color:var(--text2);margin-bottom:0.25rem}
+.weather-details{display:grid;grid-template-columns:1fr 1fr;gap:0.4rem;font-size:13px;color:var(--text2)}
+.weather-icon{font-size:2.5rem;margin-bottom:0.5rem}
+
+/* NEWS */
+.news-item{padding:0.85rem 0;border-bottom:1px solid var(--border)}
+.news-item:last-child{border-bottom:none}
+.news-item:first-child{padding-top:0}
+.news-source{font-size:11px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:var(--accent);margin-bottom:0.2rem}
+.news-title{font-size:14px;font-weight:500;line-height:1.4;color:var(--text)}
+.news-title a{color:inherit;text-decoration:none}
+.news-title a:hover{color:var(--accent)}
+.news-time{font-size:11px;color:var(--text3);margin-top:0.2rem}
+
+/* CALENDAR */
+.cal-item{display:flex;gap:1rem;padding:0.75rem 0;border-bottom:1px solid var(--border);align-items:flex-start}
+.cal-item:last-child{border-bottom:none}
+.cal-item:first-child{padding-top:0}
+.cal-time{font-size:12px;font-weight:600;color:var(--accent);min-width:52px;padding-top:2px}
+.cal-title{font-size:14px;font-weight:500;flex:1}
+.cal-sub{font-size:12px;color:var(--text3);margin-top:1px}
+.cal-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);flex-shrink:0;margin-top:5px}
+
+/* LOADING / ERROR */
+.loading{color:var(--text3);font-size:13px;display:flex;align-items:center;gap:8px}
+.spinner{width:14px;height:14px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin 0.8s linear infinite;flex-shrink:0}
+@keyframes spin{to{transform:rotate(360deg)}}
+.error{font-size:13px;color:#c0392b}
+
+/* NOTES */
+.notes-area{width:100%;border:1px solid var(--border-med);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);background:var(--surface);padding:0.75rem;resize:vertical;min-height:100px;line-height:1.5}
+.notes-area:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(45,90,61,0.1)}
+.notes-saved{font-size:11px;color:var(--accent);margin-top:0.4rem;height:16px}
+
+/* QUOTE */
+.quote-text{font-family:'DM Serif Display',serif;font-style:italic;font-size:1.1rem;line-height:1.5;color:var(--text);margin-bottom:0.5rem}
+.quote-author{font-size:12px;color:var(--text3)}
+
+@media(max-width:680px){
+  main{padding:1rem}
+  .grid,.grid-3{grid-template-columns:1fr}
+  .greeting{font-size:1.8rem}
+}
+</style>
+</head>
+<body>
+<main>
+
+  <div class="header">
+    <div class="greeting" id="greeting">Good morning, Zeke</div>
+    <div class="dateline">
+      <span id="dateline"></span>
+      <span>·</span>
+      <span id="time-display"></span>
+      <span>·</span>
+      <button class="refresh-btn" onclick="loadAll()">↻ Refresh</button>
+    </div>
+  </div>
+
+  <!-- WEATHER + QUOTE -->
+  <div class="grid">
+    <div class="card">
+      <div class="card-label">Philadelphia Weather</div>
+      <div id="weather-content"><div class="loading"><div class="spinner"></div>Loading weather...</div></div>
+    </div>
+    <div class="card">
+      <div class="card-label">Today's Quote</div>
+      <div id="quote-content"><div class="loading"><div class="spinner"></div>Loading...</div></div>
+    </div>
+  </div>
+
+  <!-- NATIONAL NEWS -->
+  <div class="full">
+    <div class="card">
+      <div class="card-label">National News</div>
+      <div id="national-news"><div class="loading"><div class="spinner"></div>Loading headlines...</div></div>
+    </div>
+  </div>
+
+  <!-- LOCAL NEWS + CALENDAR -->
+  <div class="grid">
+    <div class="card">
+      <div class="card-label">Philadelphia News</div>
+      <div id="local-news"><div class="loading"><div class="spinner"></div>Loading local news...</div></div>
+    </div>
+    <div class="card">
+      <div class="card-label">Today's Calendar</div>
+      <div id="calendar-content">
+        <div style="font-size:13px;color:var(--text2);line-height:1.6">
+          <p style="margin-bottom:0.75rem">Connect your Google Calendar to see today's events here.</p>
+          <button onclick="initCalendar()" style="background:var(--accent);color:white;border:none;padding:0.5rem 1rem;border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer">Connect Google Calendar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NOTES -->
+  <div class="full">
+    <div class="card">
+      <div class="card-label">Notes & Reminders</div>
+      <textarea class="notes-area" id="notes" placeholder="Jot down anything for today..." oninput="saveNotes()"></textarea>
+      <div class="notes-saved" id="notes-saved"></div>
+    </div>
+  </div>
+
+</main>
+
+<script>
+const WEATHER_KEY = 'c1df8f029d391346e1594d808308f6e5';
+const NEWS_KEY = '7741e7809cc642dd9bf8f201148ab28e';
+const CITY = 'Philadelphia,PA,US';
+const GCAL_CLIENT_ID = '840231870401-7hu1c8sjpiqrvshmrd4lg5gki6hcst6e.apps.googleusercontent.com';
+const GCAL_SCOPE = 'https://www.googleapis.com/auth/calendar.readonly';
+
+// ── TIME & GREETING ──
+function updateTime(){
+  const now=new Date();
+  const h=now.getHours();
+  const greeting=h<12?'Good morning':'h<17?Good afternoon':'Good evening';
+  document.getElementById('greeting').textContent=(h<12?'Good morning':h<17?'Good afternoon':'Good evening')+', Zeke';
+  document.getElementById('time-display').textContent=now.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
+}
+function setDateline(){
+  const now=new Date();
+  document.getElementById('dateline').textContent=now.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
+}
+
+// ── WEATHER ──
+async function loadWeather(){
+  try{
+    const r=await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${CITY}&appid=${WEATHER_KEY}&units=imperial`);
+    const d=await r.json();
+    if(d.cod!==200)throw new Error(d.message);
+    const temp=Math.round(d.main.temp);
+    const feels=Math.round(d.main.feels_like);
+    const high=Math.round(d.main.temp_max);
+    const low=Math.round(d.main.temp_min);
+    const desc=d.weather[0].description;
+    const humidity=d.main.humidity;
+    const wind=Math.round(d.wind.speed);
+    const id=d.weather[0].id;
+    const icon=id>=800?'☀️':id===800?'☀️':id>=700?'🌫️':id>=600?'❄️':id>=500?'🌧️':id>=300?'🌦️':id>=200?'⛈️':'🌤️';
+    document.getElementById('weather-content').innerHTML=`
+      <div class="weather-icon">${icon}</div>
+      <div class="weather-main">
+        <div class="weather-temp">${temp}°</div>
+        <div><div class="weather-desc">${desc.charAt(0).toUpperCase()+desc.slice(1)}</div><div style="font-size:13px;color:var(--text3)">Feels like ${feels}°</div></div>
+      </div>
+      <div class="weather-details">
+        <div>↑ High ${high}°</div><div>↓ Low ${low}°</div>
+        <div>💧 ${humidity}%</div><div>💨 ${wind} mph</div>
+      </div>`;
+  }catch(e){document.getElementById('weather-content').innerHTML=`<div class="error">Could not load weather. Check your API key.</div>`;}
+}
+
+// ── NEWS ──
+function timeAgo(dateStr){
+  const diff=(Date.now()-new Date(dateStr))/1000/60;
+  if(diff<60)return Math.round(diff)+'m ago';
+  if(diff<1440)return Math.round(diff/60)+'h ago';
+  return Math.round(diff/1440)+'d ago';
+}
+
+async function loadNews(query,elId,pageSize=5){
+  try{
+    const url=query
+      ?`https://newsapi.org/v2/everything?q=${encodeURIComponent(query)}&apiKey=${NEWS_KEY}&pageSize=${pageSize}&sortBy=publishedAt&language=en`
+      :`https://newsapi.org/v2/top-headlines?country=us&apiKey=${NEWS_KEY}&pageSize=${pageSize}`;
+    const r=await fetch(url);
+    const d=await r.json();
+    if(d.status!=='ok')throw new Error(d.message);
+    const articles=d.articles.filter(a=>a.title&&!a.title.includes('[Removed]'));
+    if(!articles.length){document.getElementById(elId).innerHTML='<div class="error">No articles found.</div>';return;}
+    document.getElementById(elId).innerHTML=articles.map(a=>`
+      <div class="news-item">
+        <div class="news-source">${a.source.name}</div>
+        <div class="news-title"><a href="${a.url}" target="_blank">${a.title}</a></div>
+        <div class="news-time">${timeAgo(a.publishedAt)}</div>
+      </div>`).join('');
+  }catch(e){document.getElementById(elId).innerHTML=`<div class="error">Could not load news.</div>`;}
+}
+
+// ── GOOGLE CALENDAR ──
+let calToken=null;
+
+function loadStoredCalToken(){
+  const t=localStorage.getItem('nl_cal_token');
+  const e=localStorage.getItem('nl_cal_exp');
+  if(t&&e&&Date.now()<parseInt(e)){calToken=t;return true;}
+  return false;
+}
+
+function initCalendar(){
+  const base=window.location.href.split('?')[0].split('#')[0];
+  const params=new URLSearchParams({client_id:GCAL_CLIENT_ID,redirect_uri:base,response_type:'token',scope:GCAL_SCOPE,prompt:'select_account'});
+  window.location.href='https://accounts.google.com/o/oauth2/v2/auth?'+params;
+}
+
+function handleCalCallback(){
+  const params=new URLSearchParams(window.location.hash.substring(1));
+  const token=params.get('access_token');
+  const exp=params.get('expires_in');
+  if(token){
+    calToken=token;
+    localStorage.setItem('nl_cal_token',token);
+    localStorage.setItem('nl_cal_exp',Date.now()+parseInt(exp)*1000);
+    history.replaceState(null,'',window.location.pathname);
+    return true;
+  }
+  return false;
+}
+
+async function loadCalendar(){
+  if(!calToken)return;
+  document.getElementById('calendar-content').innerHTML='<div class="loading"><div class="spinner"></div>Loading events...</div>';
+  try{
+    const now=new Date();
+    const start=new Date(now.getFullYear(),now.getMonth(),now.getDate()).toISOString();
+    const end=new Date(now.getFullYear(),now.getMonth(),now.getDate()+1).toISOString();
+    const r=await fetch(`https://www.googleapis.com/calendar/v3/calendars/primary/events?timeMin=${start}&timeMax=${end}&singleEvents=true&orderBy=startTime&maxResults=10`,{headers:{'Authorization':'Bearer '+calToken}});
+    const d=await r.json();
+    if(d.error)throw new Error(d.error.message);
+    const events=d.items||[];
+    if(!events.length){
+      document.getElementById('calendar-content').innerHTML='<div style="font-size:13px;color:var(--text3);padding:0.5rem 0">No events today. Enjoy the free time!</div>';
+      return;
+    }
+    document.getElementById('calendar-content').innerHTML=events.map(e=>{
+      const isAllDay=!e.start.dateTime;
+      const timeStr=isAllDay?'All day':new Date(e.start.dateTime).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
+      return`<div class="cal-item">
+        <div class="cal-dot"></div>
+        <div style="flex:1">
+          <div class="cal-title">${e.summary||'Untitled'}</div>
+          ${e.location?`<div class="cal-sub">${e.location}</div>`:''}
+        </div>
+        <div class="cal-time">${timeStr}</div>
+      </div>`;
+    }).join('');
+  }catch(e){
+    document.getElementById('calendar-content').innerHTML=`<div class="error">Could not load calendar. <button onclick="initCalendar()" style="background:none;border:none;color:var(--accent);cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;text-decoration:underline">Reconnect</button></div>`;
+  }
+}
+
+// ── QUOTE ──
+const QUOTES=[
+  {text:"The secret of getting ahead is getting started.",author:"Mark Twain"},
+  {text:"It does not matter how slowly you go as long as you do not stop.",author:"Confucius"},
+  {text:"Small daily improvements are the key to staggering long-term results.",author:"Robin Sharma"},
+  {text:"You don't have to be great to start, but you have to start to be great.",author:"Zig Ziglar"},
+  {text:"The best time to plant a tree was 20 years ago. The second best time is now.",author:"Chinese Proverb"},
+  {text:"Financial freedom is available to those who learn about it and work for it.",author:"Robert Kiyosaki"},
+  {text:"Do not save what is left after spending; instead spend what is left after saving.",author:"Warren Buffett"},
+  {text:"Every day is a new opportunity to change your life.",author:"Unknown"},
+  {text:"Success is the sum of small efforts, repeated day in and day out.",author:"Robert Collier"},
+  {text:"Discipline is the bridge between goals and accomplishment.",author:"Jim Rohn"},
+  {text:"The only way to do great work is to love what you do.",author:"Steve Jobs"},
+  {text:"What you do today can improve all your tomorrows.",author:"Ralph Marston"},
+  {text:"A budget is telling your money where to go instead of wondering where it went.",author:"Dave Ramsey"},
+  {text:"Rich people stay rich by living like they're broke. Broke people stay broke by living like they're rich.",author:"Unknown"},
+  {text:"Either you run the day or the day runs you.",author:"Jim Rohn"},
+];
+function loadQuote(){
+  const day=new Date().getDate();
+  const q=QUOTES[day%QUOTES.length];
+  document.getElementById('quote-content').innerHTML=`<div class="quote-text">"${q.text}"</div><div class="quote-author">— ${q.author}</div>`;
+}
+
+// ── NOTES ──
+let notesTimer=null;
+function saveNotes(){
+  clearTimeout(notesTimer);
+  notesTimer=setTimeout(()=>{
+    localStorage.setItem('nl_notes',document.getElementById('notes').value);
+    const saved=document.getElementById('notes-saved');
+    saved.textContent='Saved';
+    setTimeout(()=>saved.textContent='',2000);
+  },600);
+}
+function loadNotes(){
+  const saved=localStorage.getItem('nl_notes');
+  if(saved)document.getElementById('notes').value=saved;
+}
+
+// ── LOAD ALL ──
+function loadAll(){
+  loadWeather();
+  loadNews(null,'national-news',6);
+  loadNews('Philadelphia','local-news',4);
+  loadQuote();
+  if(calToken)loadCalendar();
+}
+
+// ── INIT ──
+setDateline();
+updateTime();
+setInterval(updateTime,30000);
+loadNotes();
+const fromCallback=handleCalCallback();
+if(fromCallback||loadStoredCalToken())loadCalendar();
+loadAll();
+</script>
+</body>
+</html>

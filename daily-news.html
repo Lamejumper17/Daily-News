@@ -610,44 +610,391 @@ async function generateWorkout(){
   const focus=document.getElementById('focus-select').value;
   if(!focus){alert('Please select a focus area first.');return;}
   const out=document.getElementById('workout-output');
-  out.innerHTML='<div class="loading"><div class="spinner"></div>Generating your workout...</div>';
+  out.innerHTML='<div class="loading"><div class="spinner"></div>Building your workout...</div>';
   document.getElementById('save-workout-btn').style.display='none';
-  const recentHistory=workoutLog.slice(0,5).map(w=>`${w.date}: ${w.focus} (${w.location})`).join(', ')||'None yet';
-  const prompt=`You are Zeke's personal trainer. Create a specific workout plan.
 
-Location: ${workoutLoc==='gym'?'Gym — full equipment (barbells, dumbbells, cables, machines, squat rack, pull-up bar)':'Home — minimal equipment (bodyweight, resistance bands, dumbbells if available)'}
-Focus area: ${focus}
-Recent workouts: ${recentHistory}
+  const isGym=workoutLoc==='gym';
 
-Format the workout as follows:
-**Warm-Up** (3-5 min): List 2-3 specific warm-up exercises
+  const plans={
+    'Chest & Push':{
+      home:`**Warm-Up** (5 min)
+• Arm circles — 30 sec each direction
+• Push-up plank hold — 30 sec
+• Shoulder rolls — 30 sec
 
-**Main Workout**: List 5-7 exercises with:
-- Exercise name
-- Sets x Reps (be specific, e.g. "4 sets x 8-10 reps")
-- Rest period between sets
-- Any form tips
+**Main Workout**
+• Push-ups — 4 sets x 12 reps · rest 60s
+  Keep elbows at 45°, chest to floor
+• Wide push-ups — 3 sets x 10 reps · rest 60s
+  Hands wider than shoulders, targets outer chest
+• Pike push-ups — 3 sets x 10 reps · rest 60s
+  Hips high, targets shoulders
+• Tricep dips (on chair) — 3 sets x 12 reps · rest 60s
+• Diamond push-ups — 3 sets x 8 reps · rest 75s
+  Hands form a diamond, targets triceps
+• Decline push-ups (feet on chair) — 3 sets x 10 reps · rest 60s
 
-**Cool-Down** (3-5 min): List 2-3 stretches
+**Cool-Down** (3 min)
+• Chest doorway stretch — 30 sec each side
+• Tricep overhead stretch — 30 sec each arm
+• Child's pose — 60 sec`,
+      gym:`**Warm-Up** (5 min)
+• Arm circles — 30 sec each direction
+• Light dumbbell chest flyes — 2 sets x 15 reps (very light)
+• Band pull-aparts — 20 reps
 
-Keep it achievable in 45-60 minutes. Be encouraging but direct. If Rest Day, suggest active recovery.`;
+**Main Workout**
+• Barbell Bench Press — 4 sets x 8 reps · rest 90s
+  Start at 60-70% of max, full range of motion
+• Incline Dumbbell Press — 3 sets x 10 reps · rest 75s
+  Bench at 30-45°, elbows at 45°
+• Cable Chest Flyes — 3 sets x 12 reps · rest 60s
+  Squeeze at center, slow on the way back
+• Dumbbell Shoulder Press — 3 sets x 10 reps · rest 75s
+• Tricep Pushdowns (cable) — 3 sets x 12 reps · rest 60s
+• Overhead Tricep Extension — 3 sets x 12 reps · rest 60s
 
-  try{
-    const res=await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',
-      headers:{'Content-Type':'application/json','x-api-key':'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','anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
-      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:prompt}]})
-    });
-    const data=await res.json();
-    const plan=data.content?.[0]?.text;
-    if(!plan)throw new Error('No response');
-    currentPlan=plan;
-    renderWorkoutPlan(plan);
-    document.getElementById('save-workout-btn').style.display='';
-  }catch(e){
-    out.innerHTML='<div class="err">Could not generate workout. Try again.</div>';
-    console.error(e);
-  }
+**Cool-Down** (3 min)
+• Chest doorway stretch — 30 sec each side
+• Tricep overhead stretch — 30 sec each arm
+• Foam roll upper back — 60 sec`
+    },
+    'Back & Pull':{
+      home:`**Warm-Up** (5 min)
+• Cat-cow stretches — 10 reps
+• Band pull-aparts or towel rows — 15 reps
+• Shoulder circles — 30 sec
+
+**Main Workout**
+• Pull-ups or Inverted rows (under table) — 4 sets x max reps · rest 90s
+• Superman holds — 3 sets x 12 reps · rest 60s
+  Lift arms and legs off floor, hold 2 sec
+• Towel rows — 3 sets x 12 reps · rest 60s
+  Loop towel around door handle, lean back and row
+• Resistance band rows — 3 sets x 15 reps · rest 60s
+• Good mornings (bodyweight) — 3 sets x 15 reps · rest 60s
+• Reverse snow angels (prone) — 3 sets x 12 reps · rest 60s
+
+**Cool-Down** (3 min)
+• Child's pose — 60 sec
+• Cross-body shoulder stretch — 30 sec each arm
+• Cat-cow — 10 slow reps`,
+      gym:`**Warm-Up** (5 min)
+• Lat pulldown (light) — 2 sets x 15 reps
+• Band pull-aparts — 20 reps
+• Cat-cow — 10 reps
+
+**Main Workout**
+• Deadlift — 4 sets x 6 reps · rest 2 min
+  Drive through heels, keep back flat
+• Barbell Rows — 3 sets x 8 reps · rest 90s
+  Hinge at hips, pull to lower chest
+• Lat Pulldown — 3 sets x 10 reps · rest 75s
+  Full stretch at top, pull to upper chest
+• Seated Cable Row — 3 sets x 12 reps · rest 60s
+• Face Pulls — 3 sets x 15 reps · rest 60s
+  Great for rear delts and posture
+• Single-arm Dumbbell Row — 3 sets x 10 reps each · rest 60s
+
+**Cool-Down** (3 min)
+• Child's pose — 60 sec
+• Cross-body shoulder stretch — 30 sec each arm
+• Foam roll lats — 60 sec each side`
+    },
+    'Legs':{
+      home:`**Warm-Up** (5 min)
+• Leg swings — 15 each direction
+• Bodyweight squats — 15 reps
+• Hip circles — 10 each direction
+
+**Main Workout**
+• Bodyweight Squats — 4 sets x 20 reps · rest 60s
+  Feet shoulder-width, knees track toes
+• Bulgarian Split Squats — 3 sets x 12 reps each leg · rest 75s
+  Rear foot on chair, drop straight down
+• Glute Bridges — 3 sets x 20 reps · rest 60s
+  Squeeze at top, hold 1 sec
+• Reverse Lunges — 3 sets x 12 reps each leg · rest 60s
+• Wall Sit — 3 sets x 45 sec · rest 60s
+• Calf Raises — 4 sets x 20 reps · rest 45s
+
+**Cool-Down** (3 min)
+• Standing quad stretch — 30 sec each leg
+• Seated hamstring stretch — 30 sec each leg
+• Figure-4 glute stretch — 30 sec each side`,
+      gym:`**Warm-Up** (5 min)
+• Leg press (light) — 2 sets x 15 reps
+• Leg swings — 15 each direction
+• Bodyweight squats — 15 reps
+
+**Main Workout**
+• Barbell Back Squat — 4 sets x 6-8 reps · rest 2 min
+  Depth below parallel, chest up
+• Romanian Deadlift — 3 sets x 10 reps · rest 90s
+  Hinge at hips, feel stretch in hamstrings
+• Leg Press — 3 sets x 12 reps · rest 75s
+• Leg Curl (machine) — 3 sets x 12 reps · rest 60s
+• Walking Lunges — 3 sets x 12 reps each leg · rest 60s
+• Calf Raises (machine) — 4 sets x 20 reps · rest 45s
+
+**Cool-Down** (3 min)
+• Standing quad stretch — 30 sec each leg
+• Seated hamstring stretch — 30 sec each leg
+• Foam roll quads and IT band — 60 sec each side`
+    },
+    'Shoulders':{
+      home:`**Warm-Up** (5 min)
+• Arm circles — 30 sec each direction
+• Band pull-aparts — 20 reps
+• Neck rolls — 30 sec
+
+**Main Workout**
+• Pike Push-ups — 4 sets x 10 reps · rest 75s
+  Hips high, head between arms at bottom
+• Lateral Raise (light dumbbells or water bottles) — 3 sets x 15 reps · rest 60s
+• Front Raise — 3 sets x 12 reps · rest 60s
+• Upright Row (resistance band) — 3 sets x 12 reps · rest 60s
+• Rear delt fly (prone on floor) — 3 sets x 15 reps · rest 60s
+• Band face pulls — 3 sets x 20 reps · rest 45s
+
+**Cool-Down** (3 min)
+• Cross-body shoulder stretch — 30 sec each arm
+• Doorway chest/front delt stretch — 30 sec
+• Neck side stretch — 30 sec each side`,
+      gym:`**Warm-Up** (5 min)
+• Light lateral raises — 2 sets x 15 reps
+• Band pull-aparts — 20 reps
+• Arm circles — 30 sec
+
+**Main Workout**
+• Seated Dumbbell Shoulder Press — 4 sets x 8-10 reps · rest 90s
+• Lateral Raises — 4 sets x 12 reps · rest 60s
+  Control the descent, no swinging
+• Front Raises — 3 sets x 12 reps · rest 60s
+• Face Pulls (cable) — 3 sets x 15 reps · rest 60s
+• Upright Rows — 3 sets x 12 reps · rest 60s
+• Rear Delt Flyes (machine or bent-over) — 3 sets x 15 reps · rest 60s
+
+**Cool-Down** (3 min)
+• Cross-body shoulder stretch — 30 sec each arm
+• Doorway chest stretch — 30 sec
+• Foam roll upper traps — 60 sec`
+    },
+    'Arms (Biceps/Triceps)':{
+      home:`**Warm-Up** (5 min)
+• Arm circles — 30 sec each direction
+• Wrist rotations — 30 sec
+• Tricep stretches — 30 sec each arm
+
+**Main Workout**
+• Chin-ups or Towel Curls — 4 sets x max reps · rest 90s
+• Diamond Push-ups — 3 sets x 12 reps · rest 75s
+  Targets triceps hard
+• Dumbbell Curl (or water bottles) — 3 sets x 15 reps · rest 60s
+• Overhead Tricep Extension (one dumbbell) — 3 sets x 12 reps · rest 60s
+• Hammer Curls — 3 sets x 12 reps · rest 60s
+• Tricep Dips (chair) — 3 sets x 15 reps · rest 60s
+
+**Cool-Down** (3 min)
+• Bicep wall stretch — 30 sec each arm
+• Tricep overhead stretch — 30 sec each arm
+• Wrist flexor stretch — 30 sec each`,
+      gym:`**Warm-Up** (5 min)
+• Light cable curls — 2 sets x 15 reps
+• Tricep pushdowns (light) — 2 sets x 15 reps
+• Wrist rotations — 30 sec
+
+**Main Workout**
+• Barbell Curl — 4 sets x 8-10 reps · rest 75s
+  No swinging, full range of motion
+• Skull Crushers (EZ bar) — 4 sets x 10 reps · rest 75s
+• Incline Dumbbell Curl — 3 sets x 12 reps · rest 60s
+  Great for full bicep stretch
+• Tricep Pushdown (cable) — 3 sets x 12 reps · rest 60s
+• Hammer Curls — 3 sets x 12 reps · rest 60s
+• Overhead Tricep Extension (cable) — 3 sets x 12 reps · rest 60s
+
+**Cool-Down** (3 min)
+• Bicep wall stretch — 30 sec each arm
+• Tricep overhead stretch — 30 sec each arm
+• Forearm flexor stretch — 30 sec each`
+    },
+    'Core/Abs':{
+      home:`**Warm-Up** (5 min)
+• Cat-cow — 10 reps
+• Hip circles — 10 each direction
+• Dead bug hold — 30 sec
+
+**Main Workout**
+• Plank — 4 sets x 45 sec · rest 45s
+  Keep hips level, breathe steadily
+• Crunches — 3 sets x 20 reps · rest 45s
+• Bicycle Crunches — 3 sets x 20 reps (each side) · rest 45s
+• Leg Raises — 3 sets x 15 reps · rest 60s
+  Keep lower back pressed to floor
+• Russian Twists — 3 sets x 20 reps · rest 45s
+• Side Plank — 3 sets x 30 sec each side · rest 45s
+• Mountain Climbers — 3 sets x 30 sec · rest 45s
+
+**Cool-Down** (3 min)
+• Cobra pose — 30 sec
+• Child's pose — 60 sec
+• Supine twist — 30 sec each side`,
+      gym:`**Warm-Up** (5 min)
+• Cat-cow — 10 reps
+• Cable woodchop (light) — 10 reps each side
+• Dead bug hold — 30 sec
+
+**Main Workout**
+• Cable Crunch — 4 sets x 15 reps · rest 60s
+• Hanging Leg Raises — 3 sets x 12 reps · rest 60s
+• Ab Rollout — 3 sets x 10 reps · rest 75s
+  Keep core braced throughout
+• Plank — 3 sets x 60 sec · rest 45s
+• Cable Woodchop — 3 sets x 12 reps each side · rest 60s
+• Side Plank — 3 sets x 45 sec each side · rest 45s
+
+**Cool-Down** (3 min)
+• Cobra pose — 30 sec
+• Child's pose — 60 sec
+• Supine twist — 30 sec each side`
+    },
+    'Cardio':{
+      home:`**Warm-Up** (5 min)
+• March in place — 2 min
+• Leg swings — 15 each direction
+• Arm circles — 30 sec
+
+**Main Workout** (30-35 min HIIT)
+• Jumping Jacks — 45 sec on / 15 sec rest · 4 rounds
+• High Knees — 45 sec on / 15 sec rest · 4 rounds
+• Burpees — 30 sec on / 30 sec rest · 4 rounds
+• Jump Squats — 45 sec on / 15 sec rest · 4 rounds
+• Mountain Climbers — 45 sec on / 15 sec rest · 4 rounds
+• Skaters — 45 sec on / 15 sec rest · 3 rounds
+
+Rest 90 sec between exercises.
+
+**Cool-Down** (5 min)
+• Walk in place — 2 min
+• Standing quad stretch — 30 sec each leg
+• Seated hamstring stretch — 30 sec each leg
+• Deep breathing — 60 sec`,
+      gym:`**Warm-Up** (5 min)
+• Treadmill walk (3.5 mph) — 3 min
+• Dynamic leg swings — 15 each direction
+• Arm circles — 30 sec
+
+**Main Workout**
+• Treadmill intervals — 20 min
+  2 min at 6 mph / 1 min at 8.5 mph · repeat 7x
+• Rowing Machine — 10 min steady state
+  Aim for 24-26 strokes per minute
+• Stair Climber — 10 min
+  Moderate pace, don't lean on rails
+• Jump Rope — 5 min
+  30 sec fast / 30 sec easy
+
+**Cool-Down** (5 min)
+• Treadmill walk (2.5 mph) — 3 min
+• Standing quad stretch — 30 sec each
+• Calf stretch against wall — 30 sec each
+• Deep breathing — 60 sec`
+    },
+    'Full Body':{
+      home:`**Warm-Up** (5 min)
+• Jumping jacks — 60 sec
+• Leg swings — 15 each direction
+• Arm circles — 30 sec
+
+**Main Workout**
+• Push-ups — 3 sets x 12 reps · rest 60s
+• Bodyweight Squats — 3 sets x 15 reps · rest 60s
+• Inverted Rows (under table) — 3 sets x 10 reps · rest 75s
+• Reverse Lunges — 3 sets x 10 reps each leg · rest 60s
+• Pike Push-ups — 3 sets x 10 reps · rest 60s
+• Glute Bridges — 3 sets x 20 reps · rest 45s
+• Plank — 3 sets x 40 sec · rest 45s
+• Burpees — 3 sets x 8 reps · rest 75s
+
+**Cool-Down** (3 min)
+• Child's pose — 60 sec
+• Standing quad stretch — 30 sec each
+• Chest doorway stretch — 30 sec`,
+      gym:`**Warm-Up** (5 min)
+• Treadmill walk — 3 min
+• Bodyweight squats — 15 reps
+• Arm circles — 30 sec
+
+**Main Workout**
+• Barbell Squat — 3 sets x 8 reps · rest 90s
+• Bench Press — 3 sets x 8 reps · rest 90s
+• Barbell Row — 3 sets x 8 reps · rest 90s
+• Dumbbell Shoulder Press — 3 sets x 10 reps · rest 75s
+• Romanian Deadlift — 3 sets x 10 reps · rest 90s
+• Lat Pulldown — 3 sets x 10 reps · rest 75s
+• Plank — 3 sets x 45 sec · rest 45s
+
+**Cool-Down** (3 min)
+• Foam roll quads — 60 sec
+• Child's pose — 60 sec
+• Chest doorway stretch — 30 sec`
+    },
+    'Rest Day':{
+      home:`**Active Recovery Day**
+
+Today is about letting your muscles repair and grow. No heavy lifting.
+
+**Morning Mobility** (10-15 min)
+• Cat-cow — 10 slow reps
+• Hip circles — 10 each direction
+• Thoracic spine rotations — 10 each side
+• Pigeon pose — 60 sec each side
+• Child's pose — 60 sec
+
+**Optional Light Activity**
+• 20-30 min walk outside (easy pace)
+• Light yoga or stretching
+• Foam rolling — 5-10 min focusing on sore areas
+
+**Recovery Tips for Today**
+• Aim for 7-9 hours of sleep tonight
+• Stay hydrated — aim for 3+ liters of water
+• Eat enough protein to support recovery (0.8-1g per lb bodyweight)
+• Consider an Epsom salt bath if you're particularly sore
+
+**Tomorrow's Suggestion**
+Check back in tomorrow and pick your next training session. You've earned this rest!`,
+      gym:`**Active Recovery Day**
+
+Today is about letting your muscles repair and grow. No heavy lifting.
+
+**Morning Mobility** (10-15 min)
+• Cat-cow — 10 slow reps
+• Hip circles — 10 each direction
+• Thoracic spine rotations — 10 each side
+• Pigeon pose — 60 sec each side
+• Child's pose — 60 sec
+
+**Optional Light Activity**
+• 20-30 min easy treadmill walk
+• Light swimming if available
+• Foam rolling — 5-10 min focusing on sore areas
+
+**Recovery Tips for Today**
+• Aim for 7-9 hours of sleep tonight
+• Stay hydrated — aim for 3+ liters of water
+• Eat enough protein to support recovery (0.8-1g per lb bodyweight)
+• Consider an Epsom salt bath if you're particularly sore
+
+**Tomorrow's Suggestion**
+Check back in tomorrow and pick your next training session. You've earned this rest!`
+    }
+  };
+
+  const plan=plans[focus]?.[workoutLoc]||plans[focus]?.home||'No plan available for this selection.';
+  currentPlan=plan;
+  setTimeout(()=>{renderWorkoutPlan(plan);document.getElementById('save-workout-btn').style.display='';},300);
 }
 
 function renderWorkoutPlan(text){
@@ -773,3 +1120,4 @@ init();
 </script>
 </body>
 </html>
+
